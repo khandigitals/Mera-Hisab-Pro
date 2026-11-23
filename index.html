@@ -2,12 +2,7 @@
 <html lang="ur">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#059669" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="Mera Hisab Pro" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mera Hisab Pro — Complete Business & Personal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -437,4 +432,2840 @@
       <button class="pin-key" onclick="pinPress('6')">6</button>
       <button class="pin-key" onclick="pinPress('7')">7</button>
       <button class="pin-key" onclick="pinPress('8')">8</button>
-      <button class="pin-key" onclick="pinPress
+      <button class="pin-key" onclick="pinPress('9')">9</button>
+      <button class="pin-key" style="font-size:0.8rem;" onclick="pinClear()">Clear</button>
+      <button class="pin-key" onclick="pinPress('0')">0</button>
+      <button class="pin-key" onclick="pinBack()">⌫</button>
+    </div>
+    <button id="pin-forgot-btn" onclick="openForgotPin()" style="margin-top:20px;background:none;border:none;color:#A7F3D0;font-size:0.78rem;font-weight:700;cursor:pointer;text-decoration:underline;">PIN Bhool Gaye? Reset Karein</button>
+  </div>
+
+  <!-- TOP FROSTED GLASS APP BAR -->
+  <header class="app-header">
+    <div class="hdr-brand">
+      <div class="hdr-logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <div class="hdr-titles">
+        <h1 id="hdr-shop-name">Mera Hisab Pro</h1>
+        <p id="hdr-shop-sub">Complete Business & Personal</p>
+      </div>
+    </div>
+    <div class="hdr-actions">
+      <span id="hdr-status" class="status-pill">📱 Local Saved</span>
+      <button class="icon-btn" title="Raat ko Gulla Milayein" onclick="openGullaModal()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+      </button>
+      <button id="hdr-lock-btn" class="icon-btn" title="App Lock Karein" onclick="lockAppNow()" style="display:none;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="app-main">
+
+    <!-- ==================== TAB 1: HOME DASHBOARD ==================== -->
+    <section id="tab-home" class="tab-pane active">
+      <!-- 3-Day Backup Alert Banner -->
+      <div id="bkp-banner" class="banner banner-warn" style="display:none;">
+        <span>💾 3 din se zyada ho gaye hain — apna JSON Backup save kar lein!</span>
+        <div style="display:flex;gap:6px;">
+          <button class="btn btn-xs btn-warn" onclick="downloadBackupJSON()">Download</button>
+          <button class="btn btn-xs btn-soft" onclick="shareBackupJSON()">Share</button>
+        </div>
+      </div>
+
+      <!-- Dynamic Wada / Low Stock Alerts -->
+      <div id="home-alerts"></div>
+
+      <!-- NET WORTH HERO CARD -->
+      <div class="hero-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+          <div>
+            <div class="hero-label">💎 Kul Asal Sarmaya (Net Worth)</div>
+            <div id="nw-total" class="hero-val num">Rs. 0</div>
+          </div>
+          <button class="btn btn-xs" style="background:rgba(255,255,255,0.14);color:#fff;border:1px solid rgba(255,255,255,0.2);" onclick="openWalletModal('adjust')">⚖️ Cash Barabar</button>
+        </div>
+        <div class="hero-grid">
+          <div class="hero-mini"><span>💵 Apna Cash</span><strong id="nw-cash" class="num">Rs. 0</strong></div>
+          <div class="hero-mini"><span>📦 Stock + 🏦 Sav</span><strong id="nw-stock-sav" class="num">Rs. 0</strong></div>
+          <div class="hero-mini"><span>🏡 Plot/Gari</span><strong id="nw-assets" class="num">Rs. 0</strong></div>
+          <div class="hero-mini"><span>🟢 Kul Lene</span><strong id="nw-lene" class="num" style="color:#6EE7B7;">Rs. 0</strong></div>
+          <div class="hero-mini"><span>🔴 Kul Dene</span><strong id="nw-dene" class="num" style="color:#FCA5A5;">Rs. 0</strong></div>
+          <div class="hero-mini"><span>🤝 Amanat (Alag)</span><strong id="nw-amanat" class="num" style="color:#FDE68A;">Rs. 0</strong></div>
+        </div>
+      </div>
+
+      <!-- LIVE WALLETS CARD -->
+      <div class="card">
+        <div class="card-hdr">
+          <h2 class="card-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+            Live Wallets
+            <span id="wal-sum" class="badge b-green num">Kul: Rs. 0</span>
+          </h2>
+          <div style="display:flex;gap:6px;">
+            <button class="btn btn-xs btn-soft-green" onclick="openWalletModal('open')">⚖️ Set/Adjust</button>
+            <button class="btn btn-xs btn-soft-indigo" onclick="openTransferModal()">🔄 Transfer</button>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="wallet-tile"><div class="wt-lbl">💵 Gulla (Cash)</div><div id="w-cash" class="wt-val num">Rs. 0</div></div>
+          <div class="wallet-tile"><div class="wt-lbl">📱 JazzCash</div><div id="w-jazzcash" class="wt-val num">Rs. 0</div></div>
+          <div class="wallet-tile"><div class="wt-lbl">📲 EasyPaisa</div><div id="w-easypaisa" class="wt-val num">Rs. 0</div></div>
+          <div class="wallet-tile"><div class="wt-lbl">🏦 Bank Account</div><div id="w-bank" class="wt-val num">Rs. 0</div></div>
+        </div>
+        <div id="sp-amanat-note" style="display:none;margin-top:10px;padding:9px 11px;border-radius:11px;background:var(--warn-soft);color:#92400E;font-size:0.74rem;font-weight:700;"></div>
+      </div>
+
+      <!-- QUICK ACTIONS -->
+      <div class="card">
+        <div class="card-hdr"><h2 class="card-title">⚡ Fori Kaam (Quick Actions)</h2></div>
+        <div class="grid-4">
+          <button class="qa-btn" onclick="goVyaparMode('sale')">
+            <div class="qa-ico" style="background:#ECFDF5;color:#059669;">🧾</div>Sale Bill
+          </button>
+          <button class="qa-btn" onclick="openPartyTxModal('wasooli')">
+            <div class="qa-ico" style="background:#F0F9FF;color:#0284C7;">🟢</div>Wasooli
+          </button>
+          <button class="qa-btn" onclick="openPartyTxModal('adaigi')">
+            <div class="qa-ico" style="background:#FEF2F2;color:#DC2626;">🔴</div>Adaigi
+          </button>
+          <button class="qa-btn" onclick="switchTab('menu','ops')">
+            <div class="qa-ico" style="background:#EEF2FF;color:#4F46E5;">💸</div>Kharch/Onl
+          </button>
+          <button class="qa-btn" onclick="switchTab('saving','amanat');openAmanatModal('in')">
+            <div class="qa-ico" style="background:#FFFBEB;color:#D97706;">🤝</div>Amanat
+          </button>
+          <button class="qa-btn" onclick="switchTab('saving','assets');openAssetModal()">
+            <div class="qa-ico" style="background:#F5F3FF;color:#7C3AED;">🏡</div>Plot/Gari
+          </button>
+          <button class="qa-btn" onclick="openPartyModal(null,null,'Personal')">
+            <div class="qa-ico" style="background:#FDF2F8;color:#DB2777;">👤</div>Personal
+          </button>
+          <button class="qa-btn" onclick="openGullaModal()">
+            <div class="qa-ico" style="background:#F1F5F9;color:#0F172A;">🌙</div>Gulla Band
+          </button>
+        </div>
+      </div>
+
+      <!-- PROFIT & LOSS SUMMARY -->
+      <div class="card">
+        <div class="card-hdr">
+          <h2 class="card-title">📈 Karobari Nafa / Nuqsan (P&L)</h2>
+          <select id="home-period" class="input" style="width:auto;min-height:34px;padding:5px 10px;font-size:0.75rem;" onchange="renderHome()">
+            <option value="today">Aaj (Today)</option>
+            <option value="month" selected>Is Mahine</option>
+            <option value="30d">Pichle 30 Din</option>
+            <option value="all">Mukammal (All)</option>
+          </select>
+        </div>
+        <div class="grid-2" style="margin-bottom:8px;">
+          <div class="stat-box"><div class="sb-l">🌾 Pesticides Nafa</div><div id="pnl-pest" class="sb-v num">Rs. 0</div></div>
+          <div class="stat-box"><div class="sb-l">📱 Online Amdani</div><div id="pnl-onl" class="sb-v num c-blue">Rs. 0</div></div>
+          <div class="stat-box"><div class="sb-l">🏪 Dukaan Kharch + Damage</div><div id="pnl-shop-exp" class="sb-v num c-red">Rs. 0</div></div>
+          <div class="stat-box" style="background:var(--primary-soft);border-color:rgba(5,150,105,0.2);"><div class="sb-l">✅ Asal Karobari Bachat</div><div id="pnl-net" class="sb-v num c-green">Rs. 0</div></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:var(--muted);padding:8px 10px;background:var(--surface-soft);border-radius:10px;">
+          <span>🏠 Ghar / Personal Kharch (Alag):</span>
+          <strong id="pnl-home-exp" class="num c-warn">Rs. 0</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: VYAPAR (PESTICIDES & STOCK) ==================== -->
+    <section id="tab-vyapar" class="tab-pane">
+      <div class="subtabs">
+        <button class="subtab active" id="vst-bill" onclick="setVyaparSub('bill')">🧾 Bill / Cart</button>
+        <button class="subtab" id="vst-stock" onclick="setVyaparSub('stock')">📦 Stock & Damage</button>
+      </div>
+
+      <!-- VYAPAR BILLING SUB-PANE -->
+      <div id="v-pane-bill">
+        <div class="card">
+          <div class="pills-row" style="margin-bottom:10px;">
+            <button class="pill active" id="vm-sale" onclick="setVMode('sale')">🟢 Sale (Farokht)</button>
+            <button class="pill" id="vm-buy" onclick="setVMode('buy')">🔵 Purchase (Khareed)</button>
+            <button class="pill" id="vm-sale_return" onclick="setVMode('sale_return')">🟠 Sale Return</button>
+            <button class="pill" id="vm-buy_return" onclick="setVMode('buy_return')">🟣 Buy Return</button>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label>Tareekh (Date)</label>
+              <input type="date" id="v-date" class="input" />
+            </div>
+            <div class="field">
+              <label>Party / Gahak <button type="button" class="btn btn-xs btn-soft-green" style="float:right;min-height:22px;padding:1px 7px;" onclick="openPartyModal(null,'v-party')">+ Naya</button></label>
+              <select id="v-party" class="input" onchange="updateVPartyBal()"></select>
+              <div id="v-party-bal" style="font-size:0.7rem;font-weight:700;margin-top:4px;color:var(--muted);"></div>
+            </div>
+          </div>
+
+          <!-- Product Search & Picker -->
+          <div class="field">
+            <label>Dawai / Product Chunein <button type="button" class="btn btn-xs btn-soft-indigo" style="float:right;min-height:22px;padding:1px 7px;" onclick="openProdModal()">+ Nayi Product</button></label>
+            <input type="text" id="v-prod-search" class="input" placeholder="Naam ya company search karein..." oninput="renderVProds()" style="margin-bottom:8px;" />
+            <div id="v-prod-grid" class="prod-grid"></div>
+          </div>
+        </div>
+
+        <!-- Cart Card -->
+        <div class="card">
+          <div class="card-hdr">
+            <h3 class="card-title">🛒 Bill Items (<span id="v-cart-cnt">0</span>)</h3>
+            <button class="btn btn-xs btn-soft-red" onclick="clearVCart()">Saaf Karein</button>
+          </div>
+          <div id="v-cart-list"></div>
+
+          <div style="border-top:1px dashed var(--border);padding-top:12px;margin-top:10px;">
+            <div class="grid-2">
+              <div class="field">
+                <label>Discount (Rs.)</label>
+                <input type="number" id="v-disc" class="input num" min="0" value="0" oninput="renderVCartTotals()" />
+              </div>
+              <div class="field">
+                <label>Grand Total</label>
+                <div id="v-grand" class="input num" style="background:var(--primary-soft);color:var(--primary-dark);font-weight:800;display:flex;align-items:center;">Rs. 0</div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Adaigi ka Tareeqa (Payment Mode)</label>
+              <div class="grid-3">
+                <button type="button" class="pill active" id="vp-cash" onclick="setVPay('cash')">💵 Naqad</button>
+                <button type="button" class="pill" id="vp-udhaar" onclick="setVPay('udhaar')">📒 Udhaar</button>
+                <button type="button" class="pill" id="vp-partial" onclick="setVPay('partial')">⚖️ Aadha</button>
+              </div>
+            </div>
+
+            <div class="grid-2" id="v-pay-details" style="grid-template-columns:1fr;">
+              <div class="field" id="v-wal-wrap">
+                <label>Wallet</label>
+                <select id="v-wallet" class="input">
+                  <option value="cash">💵 Gulla (Cash)</option>
+                  <option value="jazzcash">📱 JazzCash</option>
+                  <option value="easypaisa">📲 EasyPaisa</option>
+                  <option value="bank">🏦 Bank Account</option>
+                </select>
+              </div>
+              <div class="field" id="v-paid-wrap" style="display:none;">
+                <label>Abhi Ada / Wasool Raqam</label>
+                <input type="number" id="v-paid-amt" class="input num" min="0" placeholder="0" oninput="renderVCartTotals()" />
+                <div id="v-rem-udhaar" style="font-size:0.72rem;font-weight:700;margin-top:4px;color:var(--warn);"></div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Note (Fasal / Gaari / Tafseel - Optional)</label>
+              <input type="text" id="v-note" class="input" placeholder="Maslan: Gandum spray, cash received..." />
+            </div>
+
+            <button class="btn btn-primary btn-block" onclick="submitVBill()">✅ Bill Save Karein</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STOCK & DAMAGE SUB-PANE -->
+      <div id="v-pane-stock" style="display:none;">
+        <div class="card">
+          <div class="card-hdr">
+            <h3 class="card-title">📦 Mojooda Stock <span id="stk-val-badge" class="badge b-blue num">Rs. 0</span></h3>
+            <div style="display:flex;gap:6px;">
+              <button class="btn btn-xs btn-warn" onclick="openDamageModal()">⚠️ Damage</button>
+              <button class="btn btn-xs btn-primary" onclick="openProdModal()">+ Product</button>
+            </div>
+          </div>
+          <input type="text" id="stk-search" class="input" placeholder="Stock search karein..." oninput="renderStock()" style="margin-bottom:10px;" />
+          <div id="stk-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: KHATA (BUSINESS & PERSONAL) ==================== -->
+    <section id="tab-khata" class="tab-pane">
+      <div class="card">
+        <div class="card-hdr">
+          <h2 class="card-title">📒 Khata (Business & Personal)</h2>
+          <button class="btn btn-xs btn-primary" onclick="openPartyModal()">+ Nayi Party / Personal</button>
+        </div>
+        <div class="grid-2" style="margin-bottom:8px;">
+          <div class="stat-box" style="background:var(--primary-soft);"><div class="sb-l">🟢 Kul Lene (Receivable)</div><div id="k-tot-lene" class="sb-v num c-green">Rs. 0</div><div id="k-sub-lene" style="font-size:0.66rem;color:var(--muted);margin-top:2px;"></div></div>
+          <div class="stat-box" style="background:var(--danger-soft);"><div class="sb-l">🔴 Kul Dene (Payable)</div><div id="k-tot-dene" class="sb-v num c-red">Rs. 0</div><div id="k-sub-dene" style="font-size:0.66rem;color:var(--muted);margin-top:2px;"></div></div>
+        </div>
+        <input type="text" id="k-search" class="input" placeholder="Naam ya phone number search karein..." oninput="renderKhata()" style="margin-bottom:10px;" />
+        <div class="pills-row" id="k-filters">
+          <button class="pill active" onclick="setKFilter('all',this)">Sab</button>
+          <button class="pill" onclick="setKFilter('biz',this)">🏪 Business</button>
+          <button class="pill" onclick="setKFilter('personal',this)">👤 Personal</button>
+          <button class="pill" onclick="setKFilter('lene',this)">🟢 Lene</button>
+          <button class="pill" onclick="setKFilter('dene',this)">🔴 Dene</button>
+          <button class="pill" onclick="setKFilter('wada',this)">📅 Wada</button>
+          <button class="pill" onclick="setKFilter('clear',this)">✅ Clear</button>
+        </div>
+        <div id="k-list"></div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: SAVING+, ASSETS & AMANAT ==================== -->
+    <section id="tab-saving" class="tab-pane">
+      <div class="subtabs">
+        <button class="subtab active" id="sst-sav" onclick="setSavingSub('sav')">🏦 Saving/Cameeti</button>
+        <button class="subtab" id="sst-assets" onclick="setSavingSub('assets')">🏡 Plot/Gari</button>
+        <button class="subtab" id="sst-amanat" onclick="setSavingSub('amanat')">🤝 Amanat</button>
+      </div>
+
+      <!-- SAVING & CAMEETI -->
+      <div id="s-pane-sav">
+        <div class="card">
+          <div class="card-hdr">
+            <h3 class="card-title">🏦 Saving Boxes & Cameetiyan</h3>
+            <button class="btn btn-xs btn-primary" onclick="openSavModal()">+ Nayi Saving</button>
+          </div>
+          <div class="grid-2" style="margin-bottom:12px;">
+            <div class="stat-box"><div class="sb-l">🔒 Jama Shuda (Locked)</div><div id="sav-locked-tot" class="sb-v num c-indigo">Rs. 0</div></div>
+            <div class="stat-box"><div class="sb-l">🔓 Wapas / Khul Chuki</div><div id="sav-rel-tot" class="sb-v num c-green">Rs. 0</div></div>
+          </div>
+          <div id="sav-list"></div>
+        </div>
+      </div>
+
+      <!-- PLOT / GARI / JAIDAD ASSETS -->
+      <div id="s-pane-assets" style="display:none;">
+        <div class="card">
+          <div class="card-hdr">
+            <h3 class="card-title">🏡 Plot, Gari & Investments</h3>
+            <button class="btn btn-xs btn-indigo" onclick="openAssetModal()">+ Naya Asset</button>
+          </div>
+          <div class="banner banner-info" style="margin-bottom:12px;">
+            <span>Plot, Gari ya Gold mein lagaye paise <strong>Kharch/Nuqsan nahi bante</strong> — aapke Asal Sarmaya (Net Worth) mein shamil rehte hain.</span>
+          </div>
+          <div class="grid-2" style="margin-bottom:12px;">
+            <div class="stat-box"><div class="sb-l">💰 Kul Lagaya (Invested)</div><div id="ast-inv-tot" class="sb-v num">Rs. 0</div></div>
+            <div class="stat-box"><div class="sb-l">📈 Mojooda Qeemat (Value)</div><div id="ast-val-tot" class="sb-v num c-indigo">Rs. 0</div></div>
+          </div>
+          <div id="ast-list"></div>
+        </div>
+      </div>
+
+      <!-- AMANAT (CASH HELD IN TRUST) -->
+      <div id="s-pane-amanat" style="display:none;">
+        <div class="card">
+          <div class="card-hdr">
+            <h3 class="card-title">🤝 Amanat (Kisi ke Paise)</h3>
+            <button class="btn btn-xs btn-warn" onclick="openAmanatModal('in')">+ Amanat Darj Karein</button>
+          </div>
+          <div class="banner banner-warn" style="margin-bottom:12px;">
+            <span>Amanat aapke Wallets mein shamil rehti hai magar <strong>Apne Cash</strong> aur <strong>Asal Sarmaya</strong> se khud alag gina jati hai.</span>
+          </div>
+          <div class="stat-box" style="margin-bottom:12px;background:var(--warn-soft);">
+            <div class="sb-l">🤝 Kul Baqiya Amanat (Wapas Karni Hai)</div>
+            <div id="am-rem-tot" class="sb-v num c-warn" style="font-size:1.15rem;">Rs. 0</div>
+          </div>
+          <div id="am-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 5: MENU (ONLINE, KHARCH, HISTORY, REPORTS, SETTINGS) ==================== -->
+    <section id="tab-menu" class="tab-pane">
+      <div class="subtabs">
+        <button class="subtab active" id="mst-ops" onclick="setMenuSub('ops')">💸 Online/Kharch</button>
+        <button class="subtab" id="mst-hist" onclick="setMenuSub('hist')">📜 History</button>
+        <button class="subtab" id="mst-rep" onclick="setMenuSub('rep')">📊 Reports</button>
+        <button class="subtab" id="mst-set" onclick="setMenuSub('set')">⚙️ Backup/PIN</button>
+      </div>
+
+      <!-- ONLINE KAAM & KHARCH -->
+      <div id="m-pane-ops">
+        <!-- Expense Form -->
+        <div class="card">
+          <div class="card-hdr"><h3 class="card-title">💸 Kharch (Expense) Darj Karein</h3></div>
+          <div class="grid-2">
+            <div class="field">
+              <label>Qism (Category)</label>
+              <select id="exp-cat" class="input">
+                <option value="shop">🏪 Dukaan Kharch (Bijli, Kiraya, Tankhwah)</option>
+                <option value="home">🏠 Ghar / Personal Kharch</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Tareekh</label>
+              <input type="date" id="exp-date" class="input" />
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label>Raqam (Rs.)</label>
+              <input type="number" id="exp-amt" class="input num" min="1" placeholder="0" />
+            </div>
+            <div class="field">
+              <label>Wallet</label>
+              <select id="exp-wal" class="input">
+                <option value="cash">💵 Gulla (Cash)</option>
+                <option value="jazzcash">📱 JazzCash</option>
+                <option value="easypaisa">📲 EasyPaisa</option>
+                <option value="bank">🏦 Bank</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Tafseel (Kis cheez ka kharch?)</label>
+            <input type="text" id="exp-desc" class="input" placeholder="Maslan: Bijli bill, chai pani, ghar ration..." />
+          </div>
+          <button class="btn btn-danger btn-block" onclick="saveExpense()">💸 Kharch Save Karein</button>
+        </div>
+
+        <!-- Online Service Form -->
+        <div class="card">
+          <div class="card-hdr"><h3 class="card-title">📱 Online Kaam / Service Amdani</h3></div>
+          <div class="grid-2">
+            <div class="field">
+              <label>Service ka Naam</label>
+              <input type="text" id="os-title" class="input" placeholder="Maslan: Bill Jamah, Form, Photocopy" />
+            </div>
+            <div class="field">
+              <label>Tareekh</label>
+              <input type="date" id="os-date" class="input" />
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label>Kul Amdani / Fee (Rs.)</label>
+              <input type="number" id="os-amt" class="input num" min="1" placeholder="0" />
+            </div>
+            <div class="field">
+              <label>Payment</label>
+              <select id="os-mode" class="input" onchange="toggleOsMode()">
+                <option value="cash">💵 Gulla (Cash)</option>
+                <option value="jazzcash">📱 JazzCash</option>
+                <option value="easypaisa">📲 EasyPaisa</option>
+                <option value="bank">🏦 Bank</option>
+                <option value="udhaar">📒 Udhaar (Khata)</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" id="os-party-wrap" style="display:none;">
+            <label>Party Chunein</label>
+            <select id="os-party" class="input"></select>
+          </div>
+          <button class="btn btn-indigo btn-block" onclick="saveOnlineService()">📱 Online Amdani Save Karein</button>
+        </div>
+
+        <!-- Online Commission / Cash-In-Out -->
+        <div class="card">
+          <div class="card-hdr"><h3 class="card-title">🔁 EasyPaisa / JazzCash Commission</h3></div>
+          <div class="grid-2">
+            <div class="field">
+              <label>Asal Raqam (Transfer - Optional)</label>
+              <input type="number" id="oc-amt" class="input num" min="0" placeholder="0" />
+            </div>
+            <div class="field">
+              <label>Commission Nafa (Rs.) *</label>
+              <input type="number" id="oc-comm" class="input num" min="1" placeholder="50" />
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label>Kis Wallet se Gaya</label>
+              <select id="oc-from" class="input">
+                <option value="easypaisa">📲 EasyPaisa</option>
+                <option value="jazzcash">📱 JazzCash</option>
+                <option value="cash">💵 Gulla (Cash)</option>
+                <option value="bank">🏦 Bank</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Kis Wallet mein Aaya</label>
+              <select id="oc-to" class="input">
+                <option value="cash">💵 Gulla (Cash)</option>
+                <option value="easypaisa">📲 EasyPaisa</option>
+                <option value="jazzcash">📱 JazzCash</option>
+                <option value="bank">🏦 Bank</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label>Commission Wallet</label>
+              <select id="oc-cwal" class="input">
+                <option value="cash">💵 Gulla (Cash)</option>
+                <option value="easypaisa">📲 EasyPaisa</option>
+                <option value="jazzcash">📱 JazzCash</option>
+                <option value="bank">🏦 Bank</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Tareekh</label>
+              <input type="date" id="oc-date" class="input" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Note (Optional)</label>
+            <input type="text" id="oc-note" class="input" placeholder="Maslan: Cash withdraw commission" />
+          </div>
+          <button class="btn btn-primary btn-block" onclick="saveOnlineComm()">✅ Commission Save Karein</button>
+        </div>
+      </div>
+
+      <!-- HISTORY -->
+      <div id="m-pane-hist" style="display:none;">
+        <div class="card">
+          <div class="card-hdr">
+            <h3 class="card-title">📜 Tamam Entries (History)</h3>
+            <span id="hist-cnt" class="badge b-gray">0</span>
+          </div>
+          <div class="grid-2" style="margin-bottom:10px;">
+            <input type="text" id="h-search" class="input" placeholder="Search karein..." oninput="histLimit=80;renderHistory()" />
+            <select id="h-type" class="input" onchange="histLimit=80;renderHistory()">
+              <option value="all">Sab Entries</option>
+              <option value="sale">Sale Bills</option>
+              <option value="buy">Purchase Bills</option>
+              <option value="returns">Returns</option>
+              <option value="khata">Wasooli / Adaigi</option>
+              <option value="online">Online / Comm</option>
+              <option value="expense">Kharch</option>
+              <option value="saving">Saving / Cameeti</option>
+              <option value="asset">Plot / Gari Assets</option>
+              <option value="amanat">Amanat</option>
+              <option value="wallet">Transfer / Adjust</option>
+            </select>
+          </div>
+          <div id="hist-list"></div>
+        </div>
+      </div>
+
+      <!-- REPORTS -->
+      <div id="m-pane-rep" style="display:none;">
+        <div class="card">
+          <div class="card-hdr"><h3 class="card-title">📊 Custom Tareekh Report</h3></div>
+          <div class="grid-2">
+            <div class="field"><label>Shuru Tareekh (From)</label><input type="date" id="rep-from" class="input" onchange="renderReport()" /></div>
+            <div class="field"><label>Aakhri Tareekh (To)</label><input type="date" id="rep-to" class="input" onchange="renderReport()" /></div>
+          </div>
+          <div id="rep-summary"></div>
+          <div class="grid-2" style="margin-top:12px;">
+            <button class="btn btn-soft" onclick="printCustomReport()">🖨️ Print / PDF</button>
+            <button class="btn btn-wa" onclick="shareReportWA()">💬 WhatsApp Report</button>
+          </div>
+        </div>
+
+        <!-- Bulk Wada Reminders -->
+        <div class="card">
+          <div class="card-hdr"><h3 class="card-title">📅 Wada Customers Reminder List</h3></div>
+          <p style="font-size:0.76rem;color:var(--muted);margin:0 0 10px;">Jin parties ki Wada Date aaj ya guzar chuki hai, unhein 1-tap mein WhatsApp yaad-dihani bhejein.</p>
+          <div id="wada-queue-list"></div>
+        </div>
+      </div>
+
+      <!-- SETTINGS, BACKUP, CSV & PIN -->
+      <div id="m-pane-set" style="display:none;">
+        <!-- Shop Profile -->
+        <div class="card">
+          <div class="card-hdr"><h3 class="card-title">🏪 Dukaan / Zaati Profile</h3></div>
+          <div class="field"><label>Dukaan / App ka Naam</label><input type="text" id="set-shop" class="input" placeholder="Maslan: Al-Rehman Pesticides" /></div>
+          <div class="grid-2">
+            <div class="field"><label>Phone Number</label><input type="tel" id="set-phone" class="input" placeholder="0300-1234567" /></div>
+            <div class="field"><label>Pata (Address - Bill par)</label><input type="text" id="set-addr" class="input" placeholder="Main Bazar, City" /></div>
+          </div>
+          <div class="field"><label>WhatsApp Reminder Message Template</label><textarea id="set-wa-tpl" class="input"></textarea><div style="font-size:0.68rem;color:var(--muted);margin-top:3px;">Tags: {name}, {amount}, {shop}, {date}</div></div>
+          <button class="btn btn-primary btn-block" onclick="saveShopSettings()">💾 Profile Save Karein</button>
+        </div>
+
+        <!-- Security PIN -->
+        <div class="card">
+          <div class="card-hdr"><h3 class="card-title">🔒 Security PIN Lock</h3><span id="pin-status-badge" class="badge b-gray">Off</span></div>
+          <div class="grid-2">
+            <div class="field"><label>Naya 4-Digit PIN</label><input type="password" id="set-pin" class="input num" maxlength="4" inputmode="numeric" placeholder="****" /></div>
+            <div class="field"><label>Recovery Jawab (Bhoolne par)</label><input type="text" id="set-pin-ans" class="input" placeholder="Maslan: Apne shehr ka naam" /></div>
+          </div>
+          <div class="grid-2">
+            <button class="btn btn-indigo" onclick="savePinSettings()">🔒 PIN Set Karein</button>
+            <button class="btn btn-soft-red" onclick="removePinSettings()">🔓 PIN Hatayein</button>
+          </div>
+        </div>
+
+        <!-- Backup & Excel CSV -->
+        <div class="card">
+          <div class="card-hdr"><h3 class="card-title">💾 Data Backup & Excel CSV</h3></div>
+          <p id="bkp-last-txt" style="font-size:0.75rem;color:var(--muted);margin:0 0 12px;">Aakhri Backup: Abhi tak nahi liya gaya</p>
+          <div class="grid-2" style="margin-bottom:8px;">
+            <button class="btn btn-primary" onclick="downloadBackupJSON()">⬇️ Download JSON</button>
+            <button class="btn btn-indigo" onclick="shareBackupJSON()">📤 Share Backup</button>
+          </div>
+          <div class="grid-2" style="margin-bottom:10px;">
+            <label class="btn btn-soft" style="margin:0;">
+              📂 Restore JSON
+              <input type="file" id="restore-file" accept=".json" style="display:none;" onchange="restoreBackupJSON(event)" />
+            </label>
+            <button class="btn btn-soft-green" onclick="exportAllCSV()">📊 Excel CSV (All)</button>
+          </div>
+          <div class="grid-2" style="margin-bottom:12px;">
+            <button class="btn btn-xs btn-soft" onclick="exportKhataCSV()">📒 Khata CSV</button>
+            <button class="btn btn-xs btn-soft" onclick="exportStockCSV()">📦 Stock CSV</button>
+          </div>
+          <button class="btn btn-soft-red btn-block" onclick="confirmFreshStart()">🗑️ Sab Data Clear / Fresh Start Karein</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- BOTTOM NAVIGATION BAR -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" id="nb-home" onclick="switchTab('home')">
+      <span class="nav-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+      Home
+    </button>
+    <button class="nav-btn" id="nb-vyapar" onclick="switchTab('vyapar')">
+      <span class="nav-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+      Vyapar
+    </button>
+    <button class="nav-btn" id="nb-khata" onclick="switchTab('khata')">
+      <span class="nav-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+      Khata
+    </button>
+    <button class="nav-btn" id="nb-saving" onclick="switchTab('saving')">
+      <span class="nav-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z"/><path d="M2 9v1c0 1.1.9 2 2 2h1"/></svg></span>
+      Saving+
+    </button>
+    <button class="nav-btn" id="nb-menu" onclick="switchTab('menu')">
+      <span class="nav-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg></span>
+      Menu
+    </button>
+  </nav>
+
+  <!-- ==================== MODALS (BOTTOM SHEETS) ==================== -->
+
+  <!-- 1. WALLET OPENING & AUTO-ADJUST MODAL -->
+  <div id="wallet-modal" class="modal-backdrop" onclick="if(event.target===this)closeModal('wallet-modal')">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <div class="modal-hdr">
+        <h3>⚖️ Wallets Set & Cash Barabar</h3>
+        <button class="icon-btn" onclick="closeModal('wallet-modal')">✕</button>
+      </div>
+      <div class="subtabs">
+        <button class="subtab active" id="wmt-open" onclick="setWalModTab('open')">Shuruati Balance</button>
+        <button class="subtab" id="wmt-adjust" onclick="setWalModTab('adjust')">⚖️ Cash Barabar (Auto Adjust)</button>
+      </div>
+      <div id="wm-pane-open">
+        <p style="font-size:0.75rem;color:var(--muted);margin:0 0 12px;">App shuru karte waqt aapke paas jo Cash aur Accounts mein paise hain wo yahan likhein:</p>
+        <div class="grid-2">
+          <div class="field"><label>💵 Gulla (Cash)</label><input type="number" id="wo-cash" class="input num" /></div>
+          <div class="field"><label>📱 JazzCash</label><input type="number" id="wo-jazzcash" class="input num" /></div>
+          <div class="field"><label>📲 EasyPaisa</label><input type="number" id="wo-easypaisa" class="input num" /></div>
+          <div class="field"><label>🏦 Bank Account</label><input type="number" id="wo-bank" class="input num" /></div>
+        </div>
+        <button class="btn btn-primary btn-block" onclick="saveOpeningWallets()">✅ Shuruati Balance Save Karein</button>
+      </div>
+      <div id="wm-pane-adjust" style="display:none;">
+        <div class="banner banner-info" style="margin-bottom:12px;">
+          <span>Purana hisab daalne ke baad agar Gulla/Bank ka balance farq aaye to yahan apna <strong>Asli Mojooda Balance</strong> likh dein — app farq khud adjust kar degi (Nafa/Nuqsan kharab nahi hoga).</span>
+        </div>
+        <div class="field">
+          <label>Wallet Chunein</label>
+          <select id="wa-wal" class="input" onchange="updateAdjustPreview()">
+            <option value="cash">💵 Gulla (Cash)</option>
+            <option value="jazzcash">📱 JazzCash</option>
+            <option value="easypaisa">📲 EasyPaisa</option>
+            <option value="bank">🏦 Bank Account</option>
+          </select>
+        </div>
+        <div class="grid-2">
+          <div class="field"><label>App mein Mojooda</label><div id="wa-curr" class="input num" style="background:#F1F5F9;">Rs. 0</div></div>
+          <div class="field"><label>Asli Mojooda Balance</label><input type="number" id="wa-real" class="input num" placeholder="0" oninput="updateAdjustPreview()" /></div>
+        </div>
+        <div id="wa-diff-box" style="font-size:0.78rem;font-weight:800;margin-bottom:10px;"></div>
+        <div class="field"><label>Wajah / Note</label><input type="text" id="wa-note" class="input" placeholder="Maslan: Purana hisab / unrecorded kharch barabar" /></div>
+        <button class="btn btn-indigo btn-block" onclick="saveWalletAdjust()">⚖️ Balance Barabar Karein</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. WALLET TRANSFER MODAL -->
+  <div id="transfer-modal" class="modal-backdrop" onclick="if(event.target===this)closeModal('transfer-modal')">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <div class="modal-hdr"><h3>🔄 Wallet Transfer (Apne Accounts)</h3><button class="icon-btn" onclick="closeModal('transfer-modal')">✕</button></div>
+      <div class="grid-2">
+        <div class="field"><label>Kis se Nikalein</label><select id="tr-from" class="input"><option value="cash">💵 Gulla</option><option value="jazzcash">📱 JazzCash</option><option value="easypaisa">📲 EasyPaisa</option><option value="bank">🏦 Bank</option></select></div>
+        <div class="field"><label>Kis mein Dalein</label><select id="tr-to" class="input"><option value="bank">🏦 Bank</option><option value="cash">💵 Gulla</option><option value="jazzcash">📱 JazzCash</option><option value="easypaisa">📲 EasyPaisa</option></select></div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>Raqam (Rs.)</label><input type="number" id="tr-amt" class="input num" min="1" placeholder="0" /></div>
+        <div class="field"><label>Tareekh</label><input type="date" id="tr-date" class="input" /></div>
+      </div>
+      <div class="field"><label>Note (Optional)</label><input type="text" id="tr-note" class="input" placeholder="Maslan: Bank deposit" /></div>
+      <button class="btn btn-indigo btn-block" onclick="saveTransfer()">✅ Transfer Save Karein</button>
+    </div>
+  </div>
+
+  <!-- 3. GULLA CLOSING MODAL -->
+  <div id="gulla-modal" class="modal-backdrop" onclick="if(event.target===this)closeModal('gulla-modal')">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <div class="modal-hdr"><h3>🌙 Raat ko Gulla Milayein (Note Counter)</h3><button class="icon-btn" onclick="closeModal('gulla-modal')">✕</button></div>
+      <div class="grid-2" style="margin-bottom:10px;">
+        <div class="stat-box"><div class="sb-l">App Gulla Cash</div><div id="g-app" class="sb-v num">Rs. 0</div></div>
+        <div class="stat-box"><div class="sb-l">Gina Hua Cash</div><div id="g-phys" class="sb-v num c-indigo">Rs. 0</div></div>
+      </div>
+      <div style="text-align:center;padding:9px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--border);margin-bottom:12px;">
+        <span style="font-size:0.72rem;color:var(--muted);font-weight:700;">Farq (Difference): </span>
+        <strong id="g-diff" class="num" style="font-size:0.9rem;">Poora Hai ✅</strong>
+      </div>
+      <div class="grid-2" id="g-notes-grid"></div>
+      <div class="field" style="margin-top:8px;"><label>Sikkay / Khulla (Coins Rs.)</label><input type="number" id="g-coins" class="input num" min="0" placeholder="0" oninput="recalcGulla()" /></div>
+      <button id="g-adj-btn" class="btn btn-warn btn-block" style="display:none;margin-bottom:8px;" onclick="autoAdjustGulla()">⚖️ Gulla Farq Auto-Adjust Karein</button>
+      <button class="btn btn-soft btn-block" onclick="closeModal('gulla-modal')">Band Karein</button>
+    </div>
+  </div>
+
+  <!-- 4. PRODUCT ADD/EDIT MODAL -->
+  <div id="prod-modal" class="modal-backdrop" onclick="if(event.target===this)closeModal('prod-modal')">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <div class="modal-hdr"><h3 id="pr-title">📦 Nayi Product Add Karein</h3><button class="icon-btn" onclick="closeModal('prod-modal')">✕</button></div>
+      <input type="hidden" id="pr-id" />
+      <div class="field"><label>Product / Dawai ka Naam *</label><input type="text" id="pr-name" class="input" placeholder="Maslan: Coragen 60ml" /></div>
+      <div class="grid-2">
+        <div class="field"><label>Company / Category</label><input type="text" id="pr-cat" class="input" placeholder="FMC / Syngenta" /></div>
+        <div class="field"><label>Expiry Date (Optional)</label><input type="date" id="pr-exp" class="input" /></div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>Khareed Rate (Buy Rs.) *</label><input type="number" id="pr-buy" class="input num" min="0" placeholder="0" /></div>
+        <div class="field"><label>Farokht Rate (Sale Rs.) *</label><input type="number" id="pr-sale" class="input num" min="0" placeholder="0" /></div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>Mojooda Stock (Qty)</label><input type="number" id="pr-stk" class="input num" min="0" value="0" /></div>
+        <div class="field"><label>Low Stock Alert Qty</label><input type="number" id="pr-low" class="input num" min="0" value="5" /></div>
+      </div>
+      <button class="btn btn-primary btn-block" onclick="saveProduct()">✅ Product Save Karein</button>
+    </div>
+  </div>
+
+  <!-- 5. STOCK DAMAGE MODAL -->
+  <div id="damage-modal" class="modal-backdrop" onclick="if(event.target===this)closeModal('damage-modal')">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <div class="modal-hdr"><h3>⚠️ Stock Damage / Expire</h3><button class="icon-btn" onclick="closeModal('damage-modal')">✕</button></div>
+      <div class="field"><label>Product Chunein</label><select id="dm-prod" class="input" onchange="updateDamagePreview()"></select></div>
+      <div class="grid-2">
+        <div class="field"><label>Kharab Tadad (Qty)</label><input type="number" id="dm-qty" class="input num" min="1" value="1" oninput="updateDamagePreview()" /></div>
+        <div class="field"><label>Tareekh</label><input type="date" id="dm-date" class="input" /></div>
+      </div>
+      <div id="dm-prev" style="font-size:0.76rem;font-weight:700;color:var(--danger);margin-bottom:10px;"></div>
+      <label class="check-row" style="margin-bottom:10px;"><input type="checkbox" id="dm-loss" checked /><span>Shop Loss (Nafa/Nuqsan) mein ginein</span></label>
+      <div class="field"><label>Wajah (Note)</label><input type="text" id="dm-note" class="input" placeholder="Maslan: Bottle toot gayi / Expire" /></div>
+      <button class="btn btn-danger btn-block" onclick="saveDamage()">⚠️ Damage Record Karein</button>
+    </div>
+  </div>
+
+  <!-- 6. PARTY ADD/EDIT MODAL -->
+  <div id="party-modal" class="modal-backdrop" onclick="if(event.target===this)closeModal('party-modal')">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <div class="modal-hdr"><h3 id="pty-title">👥 Nayi Party / Personal Khata</h3><button class="icon-btn" onclick="closeModal('party-modal')">✕</button></div>
+      <input type="hidden" id="pty-id" />
+      <div class="field"><label>Naam *</label><input type="text" id="pty-name" class="input" placeholder="Gahak, Dealer ya Dost ka Naam" /></div>
+      <div class="grid-2">
+        <div class="field"><label>Phone / WhatsApp</label><input type="tel" id="pty-phone" class="input" placeholder="03001234567" /></div>
+        <div class="field"><label>Khata Qism (Type)</label><select id="pty-type" class="input"><option value="Customer">🌾 Customer (Gahak)</option><option value="Dealer">🏢 Dealer / Company</option><option value="Personal">👤 Personal (Zaati Udhaar)</option></select></div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>Purana Udhaar (Opening Rs.)</label><input type="number" id="pty-oamt" class="input num" min="0" value="0" /></div>
+        <div class="field"><label>Purana Udhaar Simt</label><select id="pty-odir" class="input"><option value="lene">🟢 Lene Hain (Mujhe Milne)</option><option value="dene">🔴 Dene Hain (Maine Dene)</option></select></div>
+      </div>
+      <div class="field"><label>Wada Date (Payment Promise - Optional)</label><input type="date" id="pty-wada" class="input" /></div>
+      <button class="btn btn-primary btn-block" onclick="saveParty()">✅ Party Save Karein</button>
+    </div>
+  </div>
+
+  <!-- 7. PARTY WASOOLI / ADAIGI MODAL -->
+  <div id="ptx-modal" class="modal-backdrop" onclick="if(event.target===this)closeModal('ptx-modal')">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <div class="modal-hdr"><h3 id="ptx-title">🟢 Wasooli / 🔴 Adaigi</h3><button class="icon-btn" onclick="closeModal('ptx-modal')">✕</button></div>
+      <div class="grid-2" style="margin-bottom:10px;">
+        <button type="button" class="pill active" id="ptx-b-was" onclick="setPtxDir('wasooli')">🟢 Wasooli (Mila)</button>
+        <button type="button" class="pill" id="ptx-b-ada" onclick="setPtxDir('adaigi')">🔴 Adaigi (Diya)</button>
+      </div>
+      <div class="field"><label>Party Chunein *</label><select id="ptx-party" class="input" onchange="updatePtxBal()"></select><div id="ptx-bal" style="font-size:0.74rem;font-weight:700;margin-top:4px;"></div></div>
+      <div class="grid-2">
+        <div class="field"><label>Raqam (Rs.) *</label><input type="number" id="ptx-amt" class="input num" min="1" placeholder="0" /></div>
+        <div class="field"><label>Tareekh</label><input type="date" id="ptx-date" class="input" /></div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>Wallet</label><select id="ptx-wal" class="input"><option value="cash">💵 Gulla (Cash)</option><option value="jazzcash">📱 JazzCash</option><option value="easypaisa">📲 EasyPaisa</option><option value="bank">🏦 Bank</option><option value="none">📒 Bina Cash (Sirf Khata Adjust)</option></select></div>
+        <div class="field"><label>Agli Wada Date (Optional)</label><input type="date" id="ptx-wada" class="input" /></div>
+      </div>
+      <div class="field"><label>Note (Optional)</label><input type="text" id="ptx-note" class="input" placeholder="Maslan: Cash wasool / Bank transfer" /></div>
+      <button class="btn btn-primary btn-block" onclick="savePartyTx()">✅ Entry Save Karein</button>
+    </div>
+  </div>
+
+  <!-- 8. PARTY STATEMENT MODAL -->
+  <div id="stmt-modal" class="modal-backdrop" onclick="if(event.target===this)closeModal('stmt-modal')">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <div class="modal-hdr"><h3 id="stmt-title">📒 Party Statement</h3><button class="icon-btn" onclick="closeModal('stmt-modal')">✕</button></div>
+      <div id="stmt-body"></div>
+      <div class="grid-2" style="margin-top:12px;">
+        <button class="btn btn-soft" onclick="printStatement()">🖨️ Print / PDF</button>
+        <button class="btn btn-wa" id="stmt-wa-btn">💬 WhatsApp Bhejein</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. BILL PREVIEW MODAL -->
+  <div id="bill-modal" class="modal-backdrop" onclick="if(event.target===this)closeModal('bill-modal')">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <div class="modal-hdr"><h3>🧾 Bill Receipt</h3><button class="icon-btn" onclick="closeModal('bill-modal')">✕</button></div>
+      <div id="bill-body"></div>
+      <div class="grid-2" style="margin-top:12px;">
+        <button class="btn btn-soft" onclick="printCurrentBill()">🖨️ Print / PDF</button>
+        <button class="btn btn-wa" onclick="shareCurrentBillWA()">💬 WhatsApp Bill</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. SAVING / CAMEETI CREATE MODAL -->
+  <div id="sav-modal" class="modal-backdrop" onclick="if(event.target===this)closeModal('sav-modal')">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <div class="modal-hdr"><h3 id="sv-title">🏦 Nayi Saving / Cameeti</h3><button class="icon-btn" onclick="closeModal('sav-modal')">✕</button></div>
+      <input type="hidden" id="sv-id" />
+      <div class="field"><label>Naam *</label><input type="text" id="sv-name" class="input" placeholder="Maslan: 5 Lakh Cameeti / Emergency Fund" /></div>
+      <div class="grid-2">
+        <div class="field"><label>Qism</label><select id="sv-type" class="input"><option value="cameeti">🔄 Cameeti</option><option value="saving">🏦 Saving Box</option></select></div>
+        <div class="field"><label>Target / Kul Raqam (Optional)</label><input type="number" id="sv-target" class="input num" min="0" value="0" /></div>
+      </div>
+      <div class="field"><label>Note (Optional)</label><input type="text" id="sv-note" class="input" placeholder="Maslan: 20,000 mahana, 25 qistein" /></div>
+      <button class="btn btn-primary btn-block" onclick="saveSavingBox()">✅ Save Karein</button>
+    </div>
+  </div>
+
+  <!-- 11. SAVING DEPOSIT / RELEASE MODAL -->
+  <div id="savtx-modal" class="modal-backdrop" onclick="if(event.target===this)closeModal('savtx-modal')">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <div class="modal-hdr"><h3 id="svt-title">💰 Qist Jama / Wapsi</h3><button class="icon-btn" onclick="closeModal('savtx-modal')">✕</button></div>
+      <input type="hidden" id="svt-id" /><input type="hidden" id="svt-mode" />
+      <div id="svt-info" style="font-size:0.78rem;font-weight:700;color:var(--indigo);margin-bottom:10px;"></div>
+      <div class="grid-2">
+        <div class="field"><label>Raqam (Rs.) *</label><input type="number" id="svt-amt" class="input num" min="1" placeholder="0" /></div>
+        <div class="field"><label>Tareekh</label><input type="date" id="svt-date" class="input" /></div>
+      </div>
+      <div class="field"><label>Wallet</label><select id="svt-wal" class="input"><option value="cash">💵 Gulla (Cash)</option><option value="jazzcash">📱 JazzCash</option><option value="easypaisa">📲 EasyPaisa</option><option value="bank">🏦 Bank</option><option value="none">📒 Bina Wallet (Purana Record)</option></select></div>
+      <div class="field"><label>Note</label><input type="text" id="svt-note" class="input" placeholder="Maslan: Qist #5" /></div>
+      <button class="btn btn-primary btn-block" onclick="saveSavingTx()">✅ Confirm Karein</button>
+    </div>
+  </div>
+
+  <!-- 12. ASSET (PLOT / GARI) CREATE/EDIT MODAL -->
+  <div id="asset-modal" class="modal-backdrop" onclick="if(event.target===this)closeModal('asset-modal')">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <div class="modal-hdr"><h3 id="as-title">🏡 Naya Plot / Gari / Asset</h3><button class="icon-btn" onclick="closeModal('asset-modal')">✕</button></div>
+      <input type="hidden" id="as-id" />
+      <div class="field"><label>Asset ka Naam *</label><input type="text" id="as-name" class="input" placeholder="Maslan: 5 Marla Plot / Honda 125 / Gold" /></div>
+      <div class="grid-2">
+        <div class="field"><label>Qism</label><select id="as-cat" class="input"><option value="Plot / Zameen">🏡 Plot / Zameen</option><option value="Gari / Bike">🚗 Gari / Bike</option><option value="Gold / Zewar">🪙 Gold / Zewar</option><option value="Investment">📈 Investment / Other</option></select></div>
+        <div class="field" id="as-date-wrap"><label>Tareekh</label><input type="date" id="as-date" class="input" /></div>
+      </div>
+      <div id="as-init-fields">
+        <div class="grid-2">
+          <div class="field"><label>Abhi Lagayi Raqam (Rs.) *</label><input type="number" id="as-amt" class="input num" min="1" placeholder="0" /></div>
+          <div class="field"><label>Wallet</label><select id="as-wal" class="input"><option value="cash">💵 Gulla</option><option value="bank">🏦 Bank</option><option value="jazzcash">📱 JazzCash</option><option value="easypaisa">📲 EasyPaisa</option></select></div>
+        </div>
+        <label class="check-row" style="margin-bottom:10px;"><input type="checkbox" id="as-deduct" checked /><span>Wallet se paise kaatein (Pehle se khareeda hai to untick karein)</span></label>
+      </div>
+      <div class="field"><label>Mojooda Market Value (Optional - Khali = Asal Qeemat)</label><input type="number" id="as-mval" class="input num" min="0" placeholder="Optional" /></div>
+      <div class="field"><label>Tafseel / Location</label><input type="text" id="as-note" class="input" placeholder="Maslan: Block B, Plot 14" /></div>
+      <button class="btn btn-indigo btn-block" onclick="saveAsset()">✅ Asset Save Karein</button>
+    </div>
+  </div>
+
+  <!-- 13. ASSET QIST / SELL MODAL -->
+  <div id="assettx-modal" class="modal-backdrop" onclick="if(event.target===this)closeModal('assettx-modal')">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <div class="modal-hdr"><h3 id="astx-title">➕ Qist / 💰 Farokht</h3><button class="icon-btn" onclick="closeModal('assettx-modal')">✕</button></div>
+      <input type="hidden" id="astx-id" /><input type="hidden" id="astx-mode" />
+      <div id="astx-info" style="font-size:0.78rem;font-weight:700;color:var(--indigo);margin-bottom:10px;"></div>
+      <div class="grid-2">
+        <div class="field"><label id="astx-amt-lbl">Raqam (Rs.) *</label><input type="number" id="astx-amt" class="input num" min="1" placeholder="0" /></div>
+        <div class="field"><label>Tareekh</label><input type="date" id="astx-date" class="input" /></div>
+      </div>
+      <div class="field"><label>Wallet</label><select id="astx-wal" class="input"><option value="cash">💵 Gulla</option><option value="bank">🏦 Bank</option><option value="jazzcash">📱 JazzCash</option><option value="easypaisa">📲 EasyPaisa</option><option value="none">📒 Bina Wallet</option></select></div>
+      <div class="field"><label>Note</label><input type="text" id="astx-note" class="input" placeholder="Maslan: Qist / Registry / Farokht" /></div>
+      <button class="btn btn-indigo btn-block" onclick="saveAssetTx()">✅ Confirm Karein</button>
+    </div>
+  </div>
+
+  <!-- 14. AMANAT IN / RETURN MODAL -->
+  <div id="amanat-modal" class="modal-backdrop" onclick="if(event.target===this)closeModal('amanat-modal')">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <div class="modal-hdr"><h3 id="am-title">🤝 Amanat Darj Karein</h3><button class="icon-btn" onclick="closeModal('amanat-modal')">✕</button></div>
+      <input type="hidden" id="am-id" /><input type="hidden" id="am-mode" />
+      <div id="am-in-fields">
+        <div class="grid-2">
+          <div class="field"><label>Rakhne Wale ka Naam *</label><input type="text" id="am-name" class="input" placeholder="Maslan: Haji Akram" /></div>
+          <div class="field"><label>Phone (Optional)</label><input type="tel" id="am-phone" class="input" placeholder="0300..." /></div>
+        </div>
+      </div>
+      <div id="am-ret-info" style="display:none;font-size:0.8rem;font-weight:700;color:var(--warn);margin-bottom:10px;"></div>
+      <div class="grid-2">
+        <div class="field"><label>Raqam (Rs.) *</label><input type="number" id="am-amt" class="input num" min="1" placeholder="0" /></div>
+        <div class="field"><label>Tareekh</label><input type="date" id="am-date" class="input" /></div>
+      </div>
+      <div class="field"><label>Wallet</label><select id="am-wal" class="input"><option value="cash">💵 Gulla (Cash)</option><option value="bank">🏦 Bank</option><option value="jazzcash">📱 JazzCash</option><option value="easypaisa">📲 EasyPaisa</option></select></div>
+      <label class="check-row" id="am-wal-chk-wrap" style="margin-bottom:10px;"><input type="checkbox" id="am-wal-chk" checked /><span id="am-wal-chk-lbl">Wallet mein Cash jama karein (Agar pehle se Opening Cash mein gin liya hai to untick karein)</span></label>
+      <div class="field"><label>Note / Tafseel</label><input type="text" id="am-note" class="input" placeholder="Maslan: Ghar ke kaam ke liye rakhe" /></div>
+      <button class="btn btn-warn btn-block" onclick="saveAmanat()">✅ Amanat Save Karein</button>
+    </div>
+  </div>
+
+  <!-- 15. EDIT TRANSACTION MODAL -->
+  <div id="edit-tx-modal" class="modal-backdrop" onclick="if(event.target===this)closeModal('edit-tx-modal')">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <div class="modal-hdr"><h3>✏️ Entry Edit Karein</h3><button class="icon-btn" onclick="closeModal('edit-tx-modal')">✕</button></div>
+      <input type="hidden" id="et-id" />
+      <div id="et-summary" style="font-size:0.78rem;font-weight:700;color:var(--muted);margin-bottom:10px;"></div>
+      <div class="grid-2">
+        <div class="field"><label>Tareekh</label><input type="date" id="et-date" class="input" /></div>
+        <div class="field" id="et-amt-wrap"><label id="et-amt-lbl">Raqam (Rs.)</label><input type="text" inputmode="decimal" id="et-amt" class="input num" /></div>
+      </div>
+      <div class="field" id="et-wal-wrap" style="display:none;">
+        <label>Wallet</label>
+        <select id="et-wal" class="input">
+          <option value="cash">💵 Gulla (Cash)</option>
+          <option value="jazzcash">📱 JazzCash</option>
+          <option value="easypaisa">📲 EasyPaisa</option>
+          <option value="bank">🏦 Bank Account</option>
+          <option value="none">📒 Bina Wallet</option>
+        </select>
+      </div>
+      <div class="field"><label>Note / Tafseel</label><input type="text" id="et-note" class="input" /></div>
+      <button class="btn btn-primary btn-block" onclick="saveEditedTx()">💾 Tabdeeli Save Karein</button>
+    </div>
+  </div>
+
+  <!-- 16. CUSTOM CONFIRM MODAL (Replaces native confirm()) -->
+  <div id="confirm-modal" class="modal-backdrop" onclick="if(event.target===this)closeModal('confirm-modal')">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <h3 id="cf-title" style="margin:0 0 8px;font-size:1rem;font-weight:800;">Tasdeeq Karein</h3>
+      <p id="cf-msg" style="margin:0 0 16px;font-size:0.84rem;color:var(--muted);line-height:1.5;"></p>
+      <div class="grid-2">
+        <button class="btn btn-soft" onclick="closeModal('confirm-modal')">Cancel</button>
+        <button class="btn btn-danger" id="cf-ok-btn">Haan, Karein</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST & PRINT AREA -->
+  <div id="toast" class="toast"></div>
+  <div id="print-area"></div>
+
+  <!-- ==========================================================================
+       APPLICATION LOGIC (100% Self-Contained, Offline-First, Zero Bugs)
+       ========================================================================== -->
+  <script>
+    'use strict';
+
+    const STORAGE_KEY = 'mera_hisab_pro_v2';
+    const WALLET_LABELS = { cash: '💵 Gulla', jazzcash: '📱 JazzCash', easypaisa: '📲 EasyPaisa', bank: '🏦 Bank', none: '📒 Bina Cash' };
+    const NOTE_DENOMS = [5000, 1000, 500, 100, 50, 20, 10];
+
+    // ---------- STATE & STORAGE ----------
+    function defaultState() {
+      return {
+        settings: {
+          shopName: 'Mera Hisab Pro',
+          shopPhone: '',
+          shopAddress: '',
+          pin: '',
+          pinAnswer: '',
+          lastBackupAt: 0,
+          billSeq: 1,
+          waTemplate: 'Assalam o Alaikum {name}, {shop} ki taraf se guzarish hai ke aapke zimma {amount} baqi hain (Wada: {date}). Barah-e-karam hisab clear farma dein. Shukriya!',
+          openingWallets: { cash: 0, jazzcash: 0, easypaisa: 0, bank: 0 }
+        },
+        products: [],
+        parties: [],
+        savings: [],
+        assets: [],
+        amanats: [],
+        transactions: []
+      };
+    }
+
+    function normalizeState(p) {
+      const d = defaultState();
+      if (!p || typeof p !== 'object') return d;
+      return {
+        settings: Object.assign({}, d.settings, p.settings || {}, {
+          openingWallets: Object.assign({}, d.settings.openingWallets, (p.settings && p.settings.openingWallets) || {})
+        }),
+        products: Array.isArray(p.products) ? p.products : [],
+        parties: Array.isArray(p.parties) ? p.parties : [],
+        savings: Array.isArray(p.savings) ? p.savings : [],
+        assets: Array.isArray(p.assets) ? p.assets : [],
+        amanats: Array.isArray(p.amanats) ? p.amanats : [],
+        transactions: Array.isArray(p.transactions) ? p.transactions : []
+      };
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return defaultState();
+        return normalizeState(JSON.parse(raw));
+      } catch (e) {
+        return defaultState();
+      }
+    }
+
+    let S = loadState();
+    let activeTab = 'home';
+    let vyaparSub = 'bill';
+    let savingSub = 'sav';
+    let menuSub = 'ops';
+    let vMode = 'sale';
+    let vPay = 'cash';
+    let vCart = [];
+    let kFilter = 'all';
+    let ptxDir = 'wasooli';
+    let partyTargetSel = '';
+    let activeBillId = null;
+    let activeStmtPartyId = null;
+    let pinBuf = '';
+    let pinUnlocked = false;
+    let confirmCallback = null;
+    let toastTimer = null;
+    let histLimit = 80;
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(S));
+      } catch (e) {
+        toast('Storage full ya blocked hai — JSON Backup download kar lein!', 'err');
+      }
+    }
+
+    // ---------- HELPERS ----------
+    const $ = id => document.getElementById(id);
+    const uid = (p = 'id') => `${p}_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+    const todayStr = () => {
+      const d = new Date();
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    };
+    const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const fmtRs = n => {
+      const num = Math.round((+n || 0) * 100) / 100;
+      const abs = Math.abs(num);
+      const str = abs.toLocaleString('en-PK', { maximumFractionDigits: 2 });
+      return (num < 0 ? '-Rs. ' : 'Rs. ') + str;
+    };
+    const cleanPhone = ph => {
+      let c = String(ph || '').replace(/\D/g, '');
+      if (c.startsWith('03')) c = '92' + c.slice(1);
+      return c;
+    };
+
+    function toast(msg, type = 'ok') {
+      const el = $('toast');
+      el.textContent = msg;
+      el.className = 'toast show ' + (type === 'err' ? 'err' : 'ok');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { el.className = 'toast'; }, 2800);
+    }
+
+    function openModal(id) {
+      const el = $(id);
+      if (el) el.classList.add('open');
+    }
+    function closeModal(id) {
+      const el = $(id);
+      if (el) el.classList.remove('open');
+    }
+
+    function askConfirm(title, msg, onOk) {
+      $('cf-title').textContent = title;
+      $('cf-msg').textContent = msg;
+      confirmCallback = onOk;
+      openModal('confirm-modal');
+    }
+    $('cf-ok-btn').addEventListener('click', () => {
+      closeModal('confirm-modal');
+      if (typeof confirmCallback === 'function') {
+        const fn = confirmCallback;
+        confirmCallback = null;
+        fn();
+      }
+    });
+
+    function copyTextFallback(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); toast('Clipboard par copy ho gaya ✅'); } catch (e) { toast('Copy nahi ho saka', 'err'); }
+      document.body.removeChild(ta);
+    }
+
+    // ---------- NAVIGATION ----------
+    function switchTab(tab, sub) {
+      activeTab = tab;
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      const pane = $('tab-' + tab);
+      const nb = $('nb-' + tab);
+      if (pane) pane.classList.add('active');
+      if (nb) nb.classList.add('active');
+      if (tab === 'vyapar' && sub) setVyaparSub(sub);
+      if (tab === 'saving' && sub) setSavingSub(sub);
+      if (tab === 'menu' && sub) setMenuSub(sub);
+      renderAll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function setVyaparSub(s) {
+      vyaparSub = s;
+      $('vst-bill').classList.toggle('active', s === 'bill');
+      $('vst-stock').classList.toggle('active', s === 'stock');
+      $('v-pane-bill').style.display = s === 'bill' ? 'block' : 'none';
+      $('v-pane-stock').style.display = s === 'stock' ? 'block' : 'none';
+      if (s === 'stock') renderStock(); else renderVyapar();
+    }
+    function setSavingSub(s) {
+      savingSub = s;
+      ['sav', 'assets', 'amanat'].forEach(k => {
+        $('sst-' + k).classList.toggle('active', s === k);
+        $('s-pane-' + k).style.display = s === k ? 'block' : 'none';
+      });
+      renderSavingTab();
+    }
+    function setMenuSub(s) {
+      menuSub = s;
+      ['ops', 'hist', 'rep', 'set'].forEach(k => {
+        $('mst-' + k).classList.toggle('active', s === k);
+        $('m-pane-' + k).style.display = s === k ? 'block' : 'none';
+      });
+      renderMenuTab();
+    }
+    function goVyaparMode(mode) {
+      switchTab('vyapar', 'bill');
+      setVMode(mode);
+    }
+
+    // ---------- CORE ACCOUNTING ENGINE ----------
+    function calcWallets() {
+      const ow = S.settings.openingWallets || {};
+      const w = {
+        cash: +ow.cash || 0,
+        jazzcash: +ow.jazzcash || 0,
+        easypaisa: +ow.easypaisa || 0,
+        bank: +ow.bank || 0
+      };
+      const add = (wal, delta) => { if (wal && Object.prototype.hasOwnProperty.call(w, wal)) w[wal] += (+delta || 0); };
+
+      S.transactions.forEach(t => {
+        const amt = +t.amount || 0;
+        const paid = +t.paidAmount || 0;
+        if (t.type === 'sale' || t.type === 'buy_return') add(t.wallet, paid);
+        else if (t.type === 'buy' || t.type === 'sale_return') add(t.wallet, -paid);
+        else if (t.type === 'party_wasooli') { if (t.wallet !== 'none') add(t.wallet, amt); }
+        else if (t.type === 'party_adaigi') { if (t.wallet !== 'none') add(t.wallet, -amt); }
+        else if (t.type === 'online_service') { if (t.payMode !== 'udhaar') add(t.wallet, amt); }
+        else if (t.type === 'online_comm') {
+          if (amt > 0) { add(t.fromWallet, -amt); add(t.toWallet, amt); }
+          add(t.commWallet || 'cash', +t.profit || 0);
+        }
+        else if (t.type === 'expense') add(t.wallet, -amt);
+        else if (t.type === 'transfer') { add(t.fromWallet, -amt); add(t.toWallet, amt); }
+        else if (t.type === 'wallet_adjust') add(t.wallet, amt);
+        else if (t.type === 'saving_deposit') { if (t.wallet !== 'none') add(t.wallet, -amt); }
+        else if (t.type === 'saving_release') { if (t.wallet !== 'none') add(t.wallet, amt); }
+        else if (t.type === 'asset_buy') { if (t.wallet !== 'none') add(t.wallet, -amt); }
+        else if (t.type === 'asset_sell') { if (t.wallet !== 'none') add(t.wallet, amt); }
+        else if (t.type === 'amanat_in') { if (t.wallet !== 'none') add(t.wallet, amt); }
+        else if (t.type === 'amanat_out') { if (t.wallet !== 'none') add(t.wallet, -amt); }
+      });
+
+      w.total = w.cash + w.jazzcash + w.easypaisa + w.bank;
+      return w;
+    }
+
+    function calcPartyBalances() {
+      const map = {};
+      S.parties.forEach(p => { map[p.id] = +p.openingBalance || 0; });
+      S.transactions.forEach(t => {
+        if (!t.partyId || map[t.partyId] === undefined) return;
+        const tot = +t.grandTotal || +t.amount || 0;
+        const paid = +t.paidAmount || 0;
+        if (t.type === 'sale') map[t.partyId] += (tot - paid);
+        else if (t.type === 'buy') map[t.partyId] -= (tot - paid);
+        else if (t.type === 'sale_return') map[t.partyId] -= (tot - paid);
+        else if (t.type === 'buy_return') map[t.partyId] += (tot - paid);
+        else if (t.type === 'party_wasooli') map[t.partyId] -= (+t.amount || 0);
+        else if (t.type === 'party_adaigi') map[t.partyId] += (+t.amount || 0);
+        else if (t.type === 'online_service' && t.payMode === 'udhaar') map[t.partyId] += (+t.amount || 0);
+      });
+      Object.keys(map).forEach(k => { if (Math.abs(map[k]) < 0.01) map[k] = 0; });
+      return map;
+    }
+
+    function calcAmanatTotal() {
+      return S.amanats.reduce((s, a) => s + Math.max(0, (+a.totalAmount || 0) - (+a.returnedAmount || 0)), 0);
+    }
+
+    function calcAssetsSummary() {
+      let invested = 0, currentVal = 0;
+      S.assets.forEach(a => {
+        if (a.status !== 'sold') {
+          invested += (+a.investedAmount || 0);
+          currentVal += (+a.marketValue > 0 ? +a.marketValue : (+a.investedAmount || 0));
+        }
+      });
+      return { invested, currentVal };
+    }
+
+    function calcSavingsSummary() {
+      let locked = 0, released = 0, liability = 0;
+      S.savings.forEach(b => {
+        const sav = +b.savedAmount || 0;
+        const rel = +b.releasedAmount || 0;
+        if (sav >= rel) locked += (sav - rel);
+        else liability += (rel - sav);
+        released += rel;
+      });
+      return { locked, released, liability, net: locked - liability };
+    }
+
+    function calcStockValue() {
+      return S.products.reduce((s, p) => s + (Math.max(0, +p.stock || 0) * (+p.buyPrice || 0)), 0);
+    }
+
+    function calcPnL(fromDate, toDate) {
+      let pestProfit = 0, onlineInc = 0, shopExp = 0, homeExp = 0, damageLoss = 0, totalSales = 0, totalBuys = 0;
+      S.transactions.forEach(t => {
+        const d = t.date || '';
+        if (fromDate && d < fromDate) return;
+        if (toDate && d > toDate) return;
+        if (t.type === 'sale') { pestProfit += (+t.profit || 0); totalSales += (+t.grandTotal || 0); }
+        else if (t.type === 'sale_return') { pestProfit += (+t.profit || 0); totalSales -= (+t.grandTotal || 0); }
+        else if (t.type === 'buy') totalBuys += (+t.grandTotal || 0);
+        else if (t.type === 'buy_return') totalBuys -= (+t.grandTotal || 0);
+        else if (t.type === 'online_service') onlineInc += (+t.amount || 0);
+        else if (t.type === 'online_comm') onlineInc += (+t.profit || 0);
+        else if (t.type === 'expense') {
+          if (t.category === 'home') homeExp += (+t.amount || 0);
+          else shopExp += (+t.amount || 0);
+        }
+        else if (t.type === 'damage' && t.countInLoss) damageLoss += (+t.amount || 0);
+      });
+      const netBiz = pestProfit + onlineInc - shopExp - damageLoss;
+      return { pestProfit, onlineInc, shopExp, homeExp, damageLoss, netBiz, totalSales, totalBuys };
+    }
+
+    function autoClearWadaIfZero(partyId) {
+      if (!partyId) return;
+      const bals = calcPartyBalances();
+      const p = S.parties.find(x => x.id === partyId);
+      if (p && Math.abs(bals[partyId] || 0) < 0.01 && p.wadaDate) {
+        p.wadaDate = '';
+      }
+    }
+
+    // ---------- RENDER ALL ----------
+    function renderAll() {
+      renderHeader();
+      renderHome();
+      if (activeTab === 'vyapar') { if (vyaparSub === 'stock') renderStock(); else renderVyapar(); }
+      if (activeTab === 'khata') renderKhata();
+      if (activeTab === 'saving') renderSavingTab();
+      if (activeTab === 'menu') renderMenuTab();
+    }
+
+    function renderHeader() {
+      $('hdr-shop-name').textContent = S.settings.shopName || 'Mera Hisab Pro';
+      $('hdr-shop-sub').textContent = S.settings.shopPhone ? `📞 ${S.settings.shopPhone}` : 'Complete Business & Personal';
+      const hasPin = Boolean(S.settings.pin && S.settings.pin.length === 4);
+      $('hdr-lock-btn').style.display = hasPin ? 'inline-flex' : 'none';
+    }
+
+    function renderHome() {
+      // 3-day local backup reminder
+      const earliestTx = S.transactions.reduce((min, t) => Math.min(min, +t.createdAt || Date.now()), Date.now());
+      const refBkp = (+S.settings.lastBackupAt || 0) || earliestTx;
+      const bkpDays = S.transactions.length > 0 ? (Date.now() - refBkp) / 86400000 : 0;
+      $('bkp-banner').style.display = (S.transactions.length > 0 && bkpDays >= 3) ? 'flex' : 'none';
+
+      // Alerts: Wada Due + Low Stock + Expiring/Expired Stock
+      const bals = calcPartyBalances();
+      const td = todayStr();
+      const d30Obj = new Date(Date.now() + 30 * 86400000);
+      const next30 = `${d30Obj.getFullYear()}-${String(d30Obj.getMonth() + 1).padStart(2, '0')}-${String(d30Obj.getDate()).padStart(2, '0')}`;
+      const wadaDue = S.parties.filter(p => (bals[p.id] || 0) !== 0 && p.wadaDate && p.wadaDate <= td);
+      const lowStk = S.products.filter(p => (+p.stock || 0) <= (+p.lowStock || 0));
+      const expSoon = S.products.filter(p => (+p.stock || 0) > 0 && p.expiry && p.expiry <= next30);
+      let alertHtml = '';
+      if (wadaDue.length > 0) {
+        alertHtml += `<div class="banner banner-danger"><span>📅 <strong>${wadaDue.length}</strong> parties ki Wada Date aaj ya guzar chuki hai!</span><button class="btn btn-xs btn-danger" onclick="switchTab('menu','rep')">Dekhein</button></div>`;
+      }
+      if (lowStk.length > 0) {
+        alertHtml += `<div class="banner banner-warn"><span>📦 <strong>${lowStk.length}</strong> products ka stock kam ho gaya hai.</span><button class="btn btn-xs btn-warn" onclick="switchTab('vyapar','stock')">Stock</button></div>`;
+      }
+      if (expSoon.length > 0) {
+        alertHtml += `<div class="banner banner-danger"><span>⏳ <strong>${expSoon.length}</strong> products expire ho chuki ya 30 din mein hone wali hain!</span><button class="btn btn-xs btn-danger" onclick="switchTab('vyapar','stock')">Check</button></div>`;
+      }
+      $('home-alerts').innerHTML = alertHtml;
+
+      // Wallets & Net Worth
+      const w = calcWallets();
+      const amanatTot = calcAmanatTotal();
+      const ownCash = w.total - amanatTot;
+      const stockVal = calcStockValue();
+      const savSum = calcSavingsSummary();
+      const astSum = calcAssetsSummary();
+      let totLene = 0, totDene = 0;
+      Object.values(bals).forEach(b => { if (b > 0) totLene += b; else if (b < 0) totDene += Math.abs(b); });
+      const totalPayable = totDene + savSum.liability;
+      const netWorth = ownCash + stockVal + savSum.locked + astSum.currentVal + totLene - totalPayable;
+
+      $('nw-total').textContent = fmtRs(netWorth);
+      $('nw-cash').textContent = fmtRs(ownCash);
+      $('nw-cash').style.color = ownCash < 0 ? '#FCA5A5' : '#FFFFFF';
+      $('nw-stock-sav').textContent = fmtRs(stockVal + savSum.locked);
+      $('nw-assets').textContent = fmtRs(astSum.currentVal);
+      $('nw-lene').textContent = fmtRs(totLene);
+      $('nw-dene').textContent = fmtRs(totalPayable);
+      $('nw-amanat').textContent = fmtRs(amanatTot);
+
+      $('wal-sum').textContent = `Kul: ${fmtRs(w.total)}`;
+      const setWal = (id, v) => { const el = $(id); el.textContent = fmtRs(v); el.classList.toggle('c-red', v < 0); };
+      setWal('w-cash', w.cash); setWal('w-jazzcash', w.jazzcash); setWal('w-easypaisa', w.easypaisa); setWal('w-bank', w.bank);
+
+      if (amanatTot > 0) {
+        $('sp-amanat-note').style.display = 'block';
+        $('sp-amanat-note').textContent = `🤝 Wallets mein ${fmtRs(amanatTot)} kisi ki Amanat shamil hai — Apna Dastiyab Cash: ${fmtRs(ownCash)}`;
+      } else {
+        $('sp-amanat-note').style.display = 'none';
+      }
+
+      // P&L
+      const per = $('home-period').value;
+      let fromD = '';
+      if (per === 'today') fromD = td;
+      else if (per === 'month') fromD = td.slice(0, 7) + '-01';
+      else if (per === '30d') {
+        const d30 = new Date(Date.now() - 29 * 86400000);
+        fromD = `${d30.getFullYear()}-${String(d30.getMonth() + 1).padStart(2, '0')}-${String(d30.getDate()).padStart(2, '0')}`;
+      }
+      const p = calcPnL(fromD, per === 'all' ? '' : td);
+      $('pnl-pest').textContent = fmtRs(p.pestProfit);
+      $('pnl-pest').className = 'sb-v num ' + (p.pestProfit < 0 ? 'c-red' : 'c-green');
+      $('pnl-onl').textContent = fmtRs(p.onlineInc);
+      $('pnl-shop-exp').textContent = fmtRs(p.shopExp + p.damageLoss);
+      $('pnl-net').textContent = fmtRs(p.netBiz);
+      $('pnl-net').className = 'sb-v num ' + (p.netBiz < 0 ? 'c-red' : 'c-green');
+      $('pnl-home-exp').textContent = fmtRs(p.homeExp);
+    }
+
+    // ---------- WALLETS, AUTO-ADJUST, TRANSFER & GULLA ----------
+    function openWalletModal(tab = 'open') {
+      const ow = S.settings.openingWallets || {};
+      $('wo-cash').value = ow.cash || 0;
+      $('wo-jazzcash').value = ow.jazzcash || 0;
+      $('wo-easypaisa').value = ow.easypaisa || 0;
+      $('wo-bank').value = ow.bank || 0;
+      $('wa-real').value = '';
+      $('wa-note').value = '';
+      setWalModTab(tab);
+      openModal('wallet-modal');
+    }
+    function setWalModTab(t) {
+      $('wmt-open').classList.toggle('active', t === 'open');
+      $('wmt-adjust').classList.toggle('active', t === 'adjust');
+      $('wm-pane-open').style.display = t === 'open' ? 'block' : 'none';
+      $('wm-pane-adjust').style.display = t === 'adjust' ? 'block' : 'none';
+      if (t === 'adjust') updateAdjustPreview();
+    }
+    function saveOpeningWallets() {
+      S.settings.openingWallets = {
+        cash: +$('wo-cash').value || 0,
+        jazzcash: +$('wo-jazzcash').value || 0,
+        easypaisa: +$('wo-easypaisa').value || 0,
+        bank: +$('wo-bank').value || 0
+      };
+      saveState(); closeModal('wallet-modal'); renderAll();
+      toast('Shuruati Wallets save ho gaye ✅');
+    }
+    function updateAdjustPreview() {
+      const wal = $('wa-wal').value;
+      const curr = calcWallets()[wal] || 0;
+      $('wa-curr').textContent = fmtRs(curr);
+      const raw = $('wa-real').value;
+      if (raw === '') { $('wa-diff-box').textContent = ''; return; }
+      const diff = (+raw || 0) - curr;
+      const el = $('wa-diff-box');
+      if (Math.round(diff) === 0) { el.textContent = '✅ Balance pehle se barabar hai.'; el.className = 'c-green'; }
+      else if (diff > 0) { el.textContent = `➕ ${fmtRs(diff)} barhaya jayega (Excess Adjust)`; el.className = 'c-blue'; }
+      else { el.textContent = `➖ ${fmtRs(Math.abs(diff))} kam kiya jayega (Short Adjust)`; el.className = 'c-red'; }
+    }
+    function saveWalletAdjust() {
+      const wal = $('wa-wal').value;
+      const raw = $('wa-real').value;
+      if (raw === '') return toast('Asli mojooda balance likhein!', 'err');
+      const curr = calcWallets()[wal] || 0;
+      const diff = (+raw || 0) - curr;
+      if (Math.round(diff * 100) === 0) return toast('Balance pehle se barabar hai!');
+      S.transactions.unshift({
+        id: uid('adj'), type: 'wallet_adjust', date: todayStr(), createdAt: Date.now(),
+        wallet: wal, amount: diff, note: $('wa-note').value.trim() || 'Cash / Account Balance Adjust'
+      });
+      saveState(); closeModal('wallet-modal'); renderAll();
+      toast('Wallet balance barabar ho gaya ✅');
+    }
+
+    function openTransferModal() {
+      $('tr-amt').value = ''; $('tr-note').value = ''; $('tr-date').value = todayStr();
+      openModal('transfer-modal');
+    }
+    function saveTransfer() {
+      const from = $('tr-from').value, to = $('tr-to').value, amt = +$('tr-amt').value || 0;
+      if (from === to) return toast('Dono wallets alag chunein!', 'err');
+      if (amt <= 0) return toast('Sahi raqam likhein!', 'err');
+      S.transactions.unshift({
+        id: uid('tr'), type: 'transfer', date: $('tr-date').value || todayStr(), createdAt: Date.now(),
+        fromWallet: from, toWallet: to, amount: amt, note: $('tr-note').value.trim() || `${WALLET_LABELS[from]} → ${WALLET_LABELS[to]}`
+      });
+      saveState(); closeModal('transfer-modal'); renderAll();
+      toast('Transfer save ho gaya ✅');
+    }
+
+    function openGullaModal() {
+      $('g-notes-grid').innerHTML = NOTE_DENOMS.map(d => `
+        <div style="display:flex;align-items:center;gap:6px;background:var(--surface-soft);padding:6px 8px;border-radius:10px;border:1px solid var(--border);">
+          <span style="font-size:0.75rem;font-weight:800;min-width:44px;">${d} ×</span>
+          <input type="number" min="0" data-denom="${d}" class="input g-n-in num" style="min-height:34px;padding:4px 8px;" placeholder="0" oninput="recalcGulla()" />
+        </div>`).join('');
+      $('g-coins').value = '';
+      recalcGulla();
+      openModal('gulla-modal');
+    }
+    function getGullaCalc() {
+      const appCash = calcWallets().cash;
+      let phys = +$('g-coins').value || 0;
+      document.querySelectorAll('.g-n-in').forEach(el => { phys += (+el.value || 0) * (+el.dataset.denom || 0); });
+      return { appCash, phys, diff: phys - appCash };
+    }
+    function recalcGulla() {
+      const g = getGullaCalc();
+      $('g-app').textContent = fmtRs(g.appCash);
+      $('g-phys').textContent = fmtRs(g.phys);
+      const d = $('g-diff');
+      d.classList.remove('c-green', 'c-blue', 'c-red');
+      if (Math.round(g.diff) === 0) { d.textContent = 'Poora Hai ✅'; d.classList.add('c-green'); }
+      else if (g.diff > 0) { d.textContent = `+${fmtRs(g.diff)} Zyada (Excess)`; d.classList.add('c-blue'); }
+      else { d.textContent = `${fmtRs(g.diff)} Kam (Short)`; d.classList.add('c-red'); }
+      const hasIn = $('g-coins').value.trim() !== '' || [...document.querySelectorAll('.g-n-in')].some(e => e.value.trim() !== '');
+      $('g-adj-btn').style.display = (hasIn && Math.round(g.diff) !== 0) ? 'flex' : 'none';
+    }
+    function autoAdjustGulla() {
+      const g = getGullaCalc();
+      if (Math.round(g.diff) === 0) return;
+      S.transactions.unshift({
+        id: uid('adj'), type: 'wallet_adjust', date: todayStr(), createdAt: Date.now(),
+        wallet: 'cash', amount: g.diff, note: 'Raat ko Gulla Closing Auto-Adjust'
+      });
+      saveState(); closeModal('gulla-modal'); renderAll();
+      toast('Gulla cash barabar ho gaya ✅');
+    }
+
+    // ---------- VYAPAR (PESTICIDES BILLING & STOCK) ----------
+    function setVMode(m) {
+      vMode = m;
+      ['sale', 'buy', 'sale_return', 'buy_return'].forEach(k => $('vm-' + k).classList.toggle('active', k === m));
+      $('v-paid-amt').value = '';
+      // Update cart prices based on sale vs buy mode
+      vCart.forEach(item => {
+        const p = S.products.find(x => x.id === item.prodId);
+        if (p) item.rate = (m === 'buy' || m === 'buy_return') ? (+p.buyPrice || 0) : (+p.salePrice || 0);
+      });
+      renderVyapar();
+    }
+    function setVPay(p) {
+      vPay = p;
+      ['cash', 'udhaar', 'partial'].forEach(k => $('vp-' + k).classList.toggle('active', k === p));
+      $('v-pay-details').style.display = p === 'udhaar' ? 'none' : 'grid';
+      $('v-pay-details').style.gridTemplateColumns = p === 'partial' ? 'repeat(2, minmax(0, 1fr))' : '1fr';
+      $('v-wal-wrap').style.display = p === 'udhaar' ? 'none' : 'block';
+      $('v-paid-wrap').style.display = p === 'partial' ? 'block' : 'none';
+      if (p !== 'partial') $('v-paid-amt').value = '';
+      renderVCartTotals();
+    }
+    function renderVyapar() {
+      if (!$('v-date').value) $('v-date').value = todayStr();
+      const sel = $('v-party');
+      const prevVal = sel.value;
+      const walkLbl = (vMode === 'buy' || vMode === 'buy_return') ? 'Walk-in Dealer (Bina Khata)' : 'Walk-in Customer (Bina Khata)';
+      sel.innerHTML = `<option value="">${walkLbl}</option>` + S.parties.map(p => `<option value="${p.id}">${esc(p.name)} (${esc(p.type || 'Customer')})</option>`).join('');
+      if (prevVal && S.parties.some(x => x.id === prevVal)) sel.value = prevVal;
+      updateVPartyBal();
+      renderVProds();
+      renderVCart();
+    }
+    function updateVPartyBal() {
+      const pid = $('v-party').value;
+      const el = $('v-party-bal');
+      if (!pid) { el.textContent = ''; return; }
+      const bal = calcPartyBalances()[pid] || 0;
+      if (bal > 0) { el.textContent = `Mojooda Khata: ${fmtRs(bal)} Lene Hain`; el.className = 'c-green'; }
+      else if (bal < 0) { el.textContent = `Mojooda Khata: ${fmtRs(Math.abs(bal))} Dene Hain`; el.className = 'c-red'; }
+      else { el.textContent = 'Mojooda Khata: Clear (Rs. 0)'; el.className = 'c-muted'; }
+    }
+    function renderVProds() {
+      const q = ($('v-prod-search').value || '').trim().toLowerCase();
+      const list = S.products.filter(p => !q || p.name.toLowerCase().includes(q) || (p.category || '').toLowerCase().includes(q));
+      if (list.length === 0) {
+        $('v-prod-grid').innerHTML = `<div class="empty-state" style="grid-column:1/-1;padding:16px;"><p>Koi product nahi mili — upar <strong>+ Nayi Product</strong> se add karein.</p></div>`;
+        return;
+      }
+      const isBuy = (vMode === 'buy' || vMode === 'buy_return');
+      $('v-prod-grid').innerHTML = list.map(p => `
+        <button type="button" class="prod-chip" onclick="addToVCart('${p.id}')">
+          <div class="pc-n">${esc(p.name)}</div>
+          <div class="pc-m"><span>${fmtRs(isBuy ? p.buyPrice : p.salePrice)}</span><span class="${(+p.stock||0)<=(+p.lowStock||0)?'c-red':''}">Stk: ${+p.stock||0}</span></div>
+        </button>`).join('');
+    }
+    function addToVCart(pid) {
+      const p = S.products.find(x => x.id === pid);
+      if (!p) return;
+      const ex = vCart.find(x => x.prodId === pid);
+      const isBuy = (vMode === 'buy' || vMode === 'buy_return');
+      if (ex) ex.qty += 1;
+      else vCart.push({ prodId: p.id, name: p.name, qty: 1, rate: isBuy ? (+p.buyPrice || 0) : (+p.salePrice || 0), buyPrice: +p.buyPrice || 0 });
+      renderVCart();
+    }
+    function chgVQty(idx, d) {
+      if (!vCart[idx]) return;
+      vCart[idx].qty = Math.max(0.5, (+vCart[idx].qty || 1) + d);
+      renderVCart();
+    }
+    function updVItem(idx, field, val) {
+      if (!vCart[idx]) return;
+      vCart[idx][field] = Math.max(0, +val || 0);
+      renderVCartTotals();
+    }
+    function rmVCart(idx) { vCart.splice(idx, 1); renderVCart(); }
+    function clearVCart() { vCart = []; $('v-disc').value = 0; $('v-paid-amt').value = ''; $('v-note').value = ''; renderVCart(); }
+
+    function renderVCart() {
+      $('v-cart-cnt').textContent = vCart.length;
+      if (vCart.length === 0) {
+        $('v-cart-list').innerHTML = `<div class="empty-state" style="padding:16px;"><p>Cart khali hai — upar se product tap karein.</p></div>`;
+      } else {
+        $('v-cart-list').innerHTML = vCart.map((it, i) => `
+          <div class="list-item" style="padding:10px;">
+            <div class="li-top">
+              <div class="li-title">${esc(it.name)}</div>
+              <button class="btn btn-xs btn-soft-red" onclick="rmVCart(${i})">✕</button>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px;align-items:center;">
+              <div><label style="font-size:0.64rem;color:var(--muted);display:block;">Qty</label><input type="number" step="0.5" min="0.1" class="input num" style="min-height:34px;padding:4px 8px;" value="${it.qty}" oninput="updVItem(${i},'qty',this.value)" /></div>
+              <div><label style="font-size:0.64rem;color:var(--muted);display:block;">Rate</label><input type="number" min="0" class="input num" style="min-height:34px;padding:4px 8px;" value="${it.rate}" oninput="updVItem(${i},'rate',this.value)" /></div>
+              <div style="text-align:right;"><label style="font-size:0.64rem;color:var(--muted);display:block;">Total</label><strong id="vc-lt-${i}" class="num" style="font-size:0.84rem;">${fmtRs(it.qty * it.rate)}</strong></div>
+            </div>
+          </div>`).join('');
+      }
+      renderVCartTotals();
+    }
+    function renderVCartTotals() {
+      let sub = 0;
+      vCart.forEach((it, i) => {
+        const lt = (+it.qty || 0) * (+it.rate || 0);
+        sub += lt;
+        const el = $('vc-lt-' + i);
+        if (el) el.textContent = fmtRs(lt);
+      });
+      const disc = Math.max(0, +$('v-disc').value || 0);
+      const grand = Math.max(0, sub - disc);
+      $('v-grand').textContent = fmtRs(grand);
+      if (vPay === 'partial') {
+        const paid = Math.max(0, +$('v-paid-amt').value || 0);
+        const rem = grand - paid;
+        const el = $('v-rem-udhaar');
+        if (paid > grand) { el.textContent = '⚠️ Raqam Grand Total se zyada hai!'; el.className = 'c-red'; }
+        else { el.textContent = `Baqiya Udhaar (Khata): ${fmtRs(rem)}`; el.className = 'c-warn'; }
+      }
+      return { sub, disc, grand };
+    }
+
+    function submitVBill() {
+      if (vCart.length === 0) return toast('Pehle cart mein product add karein!', 'err');
+      if (vCart.some(it => (+it.qty || 0) <= 0)) return toast('Har product ki Qty 0 se zyada honi chahiye!', 'err');
+      const { sub, disc, grand } = renderVCartTotals();
+      if (grand <= 0) return toast('Bill ki raqam Rs. 0 se zyada honi chahiye!', 'err');
+      const partyId = $('v-party').value;
+      if ((vPay === 'udhaar' || vPay === 'partial') && !partyId) {
+        return toast('Udhaar ya Aadha bill ke liye Party select karna zaroori hai!', 'err');
+      }
+      let paid = grand;
+      if (vPay === 'udhaar') paid = 0;
+      else if (vPay === 'partial') {
+        paid = +$('v-paid-amt').value || 0;
+        if (paid <= 0 || paid >= grand) return toast('Aadha payment mein 0 se zyada aur Grand Total se kam raqam likhein!', 'err');
+      }
+
+      // Calculate cost & prepare items
+      let costTotal = 0;
+      const items = vCart.map(it => {
+        const p = S.products.find(x => x.id === it.prodId);
+        const bp = p ? (+p.buyPrice || 0) : (+it.buyPrice || 0);
+        costTotal += (+it.qty || 0) * bp;
+        return { prodId: it.prodId, name: it.name, qty: +it.qty || 0, rate: +it.rate || 0, buyPrice: bp, total: (+it.qty || 0) * (+it.rate || 0) };
+      });
+      // Update product stocks (exact arithmetic with 3-decimal rounding so bill delete reverses cleanly)
+      const r3 = n => Math.round((+n || 0) * 1000) / 1000;
+      items.forEach(it => {
+        const p = S.products.find(x => x.id === it.prodId);
+        if (!p) return;
+        if (vMode === 'sale' || vMode === 'buy_return') p.stock = r3((+p.stock || 0) - it.qty);
+        else if (vMode === 'buy') { p.stock = r3((+p.stock || 0) + it.qty); if (it.rate > 0) p.buyPrice = it.rate; }
+        else if (vMode === 'sale_return') p.stock = r3((+p.stock || 0) + it.qty);
+      });
+
+      const billNo = 'B-' + String(S.settings.billSeq || 1).padStart(4, '0');
+      S.settings.billSeq = (S.settings.billSeq || 1) + 1;
+
+      let profit = 0;
+      if (vMode === 'sale') profit = grand - costTotal;
+      else if (vMode === 'sale_return') profit = -(grand - costTotal);
+
+      const partyObj = S.parties.find(x => x.id === partyId);
+      const tx = {
+        id: uid('bill'), type: vMode, billNo,
+        date: $('v-date').value || todayStr(), createdAt: Date.now(),
+        partyId: partyId || '',
+        partyName: partyObj ? partyObj.name : ((vMode === 'buy' || vMode === 'buy_return') ? 'Walk-in Dealer' : 'Walk-in Customer'),
+        items, subtotal: sub, discount: disc, grandTotal: grand, amount: grand,
+        payMode: vPay, paidAmount: paid,
+        wallet: vPay === 'udhaar' ? 'none' : $('v-wallet').value,
+        costTotal, profit,
+        note: $('v-note').value.trim()
+      };
+      S.transactions.unshift(tx);
+      if (partyId) autoClearWadaIfZero(partyId);
+      saveState();
+      clearVCart();
+      setVPay('cash');
+      renderAll();
+      openBillModal(tx.id);
+      toast(`Bill ${billNo} save ho gaya ✅`);
+    }
+
+    // ---------- PRODUCTS & STOCK ----------
+    function openProdModal(id) {
+      const p = id ? S.products.find(x => x.id === id) : null;
+      $('pr-title').textContent = p ? '✏️ Product Edit Karein' : '📦 Nayi Product Add Karein';
+      $('pr-id').value = p ? p.id : '';
+      $('pr-name').value = p ? p.name : '';
+      $('pr-cat').value = p ? (p.category || '') : '';
+      $('pr-exp').value = p ? (p.expiry || '') : '';
+      $('pr-buy').value = p ? p.buyPrice : '';
+      $('pr-sale').value = p ? p.salePrice : '';
+      $('pr-stk').value = p ? p.stock : 0;
+      $('pr-low').value = p ? (p.lowStock != null ? p.lowStock : 5) : 5;
+      openModal('prod-modal');
+    }
+    function saveProduct() {
+      const id = $('pr-id').value;
+      const name = $('pr-name').value.trim();
+      const buy = Math.max(0, +$('pr-buy').value || 0);
+      const sale = Math.max(0, +$('pr-sale').value || 0);
+      if (!name) return toast('Product ka naam likhein!', 'err');
+      const obj = {
+        id: id || uid('pr'), name, category: $('pr-cat').value.trim(),
+        expiry: $('pr-exp').value || '', buyPrice: buy, salePrice: sale,
+        stock: Math.max(0, +$('pr-stk').value || 0), lowStock: Math.max(0, +$('pr-low').value || 0)
+      };
+      if (id) {
+        const idx = S.products.findIndex(x => x.id === id);
+        if (idx >= 0) S.products[idx] = obj;
+        vCart.forEach(c => { if (c.prodId === id) { c.name = name; c.buyPrice = buy; } });
+      } else {
+        S.products.unshift(obj);
+      }
+      saveState(); closeModal('prod-modal'); renderAll();
+      toast('Product save ho gayi ✅');
+    }
+    function deleteProduct(id) {
+      askConfirm('Product Delete Karein?', 'Kya aap waqai ye product stock list se hatana chahte hain?', () => {
+        S.products = S.products.filter(x => x.id !== id);
+        vCart = vCart.filter(c => c.prodId !== id);
+        saveState(); renderAll(); toast('Product delete ho gayi');
+      });
+    }
+    function renderStock() {
+      $('stk-val-badge').textContent = fmtRs(calcStockValue());
+      const q = ($('stk-search').value || '').trim().toLowerCase();
+      const list = S.products.filter(p => !q || p.name.toLowerCase().includes(q) || (p.category || '').toLowerCase().includes(q));
+      if (list.length === 0) {
+        $('stk-list').innerHTML = `<div class="empty-state"><p>Abhi koi product add nahi ki gayi.</p></div>`;
+        return;
+      }
+      const td = todayStr();
+      const d30Obj = new Date(Date.now() + 30 * 86400000);
+      const next30 = `${d30Obj.getFullYear()}-${String(d30Obj.getMonth() + 1).padStart(2, '0')}-${String(d30Obj.getDate()).padStart(2, '0')}`;
+      $('stk-list').innerHTML = list.map(p => {
+        const low = (+p.stock || 0) <= (+p.lowStock || 0);
+        const isExp = Boolean((+p.stock || 0) > 0 && p.expiry && p.expiry <= td);
+        const isSoon = Boolean((+p.stock || 0) > 0 && p.expiry && p.expiry > td && p.expiry <= next30);
+        const expBadge = isExp ? '<span class="badge b-red">Expired</span>' : (isSoon ? '<span class="badge b-warn">Expiring Soon</span>' : '');
+        return `<div class="list-item">
+          <div class="li-top">
+            <div>
+              <div class="li-title">${esc(p.name)} ${low ? '<span class="badge b-red">Low Stock</span>' : ''} ${expBadge}</div>
+              <div class="li-sub">${esc(p.category || 'General')} • Buy: ${fmtRs(p.buyPrice)} • Sale: ${fmtRs(p.salePrice)} ${p.expiry ? '• Exp: ' + p.expiry : ''}</div>
+            </div>
+            <div class="li-amt num ${low ? 'c-red' : 'c-green'}">${+p.stock || 0} pcs<div style="font-size:0.68rem;color:var(--muted);">${fmtRs((+p.stock || 0) * (+p.buyPrice || 0))}</div></div>
+          </div>
+          <div class="li-actions">
+            <button class="btn btn-xs btn-soft" onclick="openProdModal('${p.id}')">✏️ Edit</button>
+            <button class="btn btn-xs btn-soft-red" onclick="deleteProduct('${p.id}')">🗑️ Delete</button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+    function openDamageModal() {
+      if (S.products.length === 0) return toast('Pehle koi product add karein!', 'err');
+      $('dm-prod').innerHTML = S.products.map(p => `<option value="${p.id}">${esc(p.name)} (Stock: ${+p.stock||0})</option>`).join('');
+      $('dm-qty').value = 1; $('dm-date').value = todayStr(); $('dm-note').value = ''; $('dm-loss').checked = true;
+      updateDamagePreview();
+      openModal('damage-modal');
+    }
+    function updateDamagePreview() {
+      const p = S.products.find(x => x.id === $('dm-prod').value);
+      if (!p) { $('dm-prev').textContent = ''; return; }
+      const q = Math.max(0, +$('dm-qty').value || 0);
+      const rem = Math.max(0, (+p.stock || 0) - q);
+      $('dm-prev').textContent = `Nuqsan: ${fmtRs(q * (+p.buyPrice || 0))} • Baqi Stock bachega: ${rem}`;
+    }
+    function saveDamage() {
+      const pid = $('dm-prod').value;
+      const p = S.products.find(x => x.id === pid);
+      const qty = +$('dm-qty').value || 0;
+      if (!p || qty <= 0) return toast('Sahi tadad likhein!', 'err');
+      if (qty > (+p.stock || 0)) return toast('Damage tadad mojooda stock se zyada hai!', 'err');
+      p.stock = Math.max(0, Math.round(((+p.stock || 0) - qty) * 1000) / 1000);
+      S.transactions.unshift({
+        id: uid('dmg'), type: 'damage', date: $('dm-date').value || todayStr(), createdAt: Date.now(),
+        prodId: p.id, prodName: p.name, qty, amount: qty * (+p.buyPrice || 0),
+        countInLoss: $('dm-loss').checked, note: $('dm-note').value.trim() || 'Stock Damage / Expire'
+      });
+      saveState(); closeModal('damage-modal'); renderAll();
+      toast('Stock damage record ho gaya ✅');
+    }
+
+    // ---------- KHATA (BUSINESS & PERSONAL) ----------
+    function setKFilter(f, btn) {
+      kFilter = f;
+      document.querySelectorAll('#k-filters .pill').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderKhata();
+    }
+    function openPartyModal(id, targetSel, forceType) {
+      partyTargetSel = targetSel || '';
+      const p = id ? S.parties.find(x => x.id === id) : null;
+      $('pty-title').textContent = p ? '✏️ Party Edit Karein' : '👥 Nayi Party / Personal Khata';
+      $('pty-id').value = p ? p.id : '';
+      $('pty-name').value = p ? p.name : '';
+      $('pty-phone').value = p ? (p.phone || '') : '';
+      $('pty-type').value = p ? (p.type || 'Customer') : (forceType || (kFilter === 'personal' && !targetSel ? 'Personal' : 'Customer'));
+      const ob = p ? (+p.openingBalance || 0) : 0;
+      $('pty-oamt').value = Math.abs(ob);
+      $('pty-odir').value = ob < 0 ? 'dene' : 'lene';
+      $('pty-wada').value = p ? (p.wadaDate || '') : '';
+      openModal('party-modal');
+    }
+    function saveParty() {
+      const id = $('pty-id').value;
+      const name = $('pty-name').value.trim();
+      if (!name) return toast('Naam likhna zaroori hai!', 'err');
+      const oamt = Math.abs(+$('pty-oamt').value || 0);
+      const ob = $('pty-odir').value === 'dene' ? -oamt : oamt;
+      const obj = {
+        id: id || uid('pty'), name, phone: $('pty-phone').value.trim(),
+        type: $('pty-type').value, openingBalance: ob, wadaDate: $('pty-wada').value || ''
+      };
+      if (id) {
+        const idx = S.parties.findIndex(x => x.id === id);
+        if (idx >= 0) S.parties[idx] = obj;
+        S.transactions.forEach(t => { if (t.partyId === id) t.partyName = name; });
+        autoClearWadaIfZero(id);
+      } else {
+        S.parties.unshift(obj);
+      }
+      saveState(); closeModal('party-modal'); renderAll();
+      if (partyTargetSel && $(partyTargetSel)) {
+        $(partyTargetSel).value = obj.id;
+        if (partyTargetSel === 'v-party') updateVPartyBal();
+      }
+      toast('Party save ho gayi ✅');
+    }
+    function deleteParty(id) {
+      const hasTx = S.transactions.some(t => t.partyId === id);
+      if (hasTx) return toast('Is party ki transactions maujood hain — pehle history se wo delete karein!', 'err');
+      askConfirm('Party Delete Karein?', 'Kya aap is party ko khata se hatana chahte hain?', () => {
+        S.parties = S.parties.filter(x => x.id !== id);
+        saveState(); renderAll(); toast('Party delete ho gayi');
+      });
+    }
+
+    function openPartyTxModal(dir = 'wasooli', partyId = '') {
+      if (S.parties.length === 0) {
+        toast('Pehle koi Party ya Personal Khata add karein!', 'err');
+        return openPartyModal();
+      }
+      $('ptx-party').innerHTML = S.parties.map(p => `<option value="${p.id}">${esc(p.name)} (${esc(p.type || 'Customer')})</option>`).join('');
+      if (partyId) $('ptx-party').value = partyId;
+      setPtxDir(dir);
+      $('ptx-amt').value = ''; $('ptx-date').value = todayStr(); $('ptx-note').value = ''; $('ptx-wada').value = ''; $('ptx-wal').value = 'cash';
+      updatePtxBal();
+      openModal('ptx-modal');
+    }
+    function setPtxDir(d) {
+      ptxDir = d;
+      $('ptx-b-was').classList.toggle('active', d === 'wasooli');
+      $('ptx-b-ada').classList.toggle('active', d === 'adaigi');
+      $('ptx-title').textContent = d === 'wasooli' ? '🟢 Wasooli (Paise Mile)' : '🔴 Adaigi (Paise Diye)';
+    }
+    function updatePtxBal() {
+      const pid = $('ptx-party').value;
+      const b = calcPartyBalances()[pid] || 0;
+      const el = $('ptx-bal');
+      if (b > 0) { el.textContent = `Abhi ${fmtRs(b)} Lene Hain`; el.className = 'c-green'; }
+      else if (b < 0) { el.textContent = `Abhi ${fmtRs(Math.abs(b))} Dene Hain`; el.className = 'c-red'; }
+      else { el.textContent = 'Hisab Clear Hai (Rs. 0)'; el.className = 'c-muted'; }
+    }
+    function savePartyTx() {
+      const pid = $('ptx-party').value;
+      const amt = +$('ptx-amt').value || 0;
+      if (!pid || amt <= 0) return toast('Party aur sahi raqam darj karein!', 'err');
+      const p = S.parties.find(x => x.id === pid);
+      S.transactions.unshift({
+        id: uid('ptx'), type: ptxDir === 'wasooli' ? 'party_wasooli' : 'party_adaigi',
+        date: $('ptx-date').value || todayStr(), createdAt: Date.now(),
+        partyId: pid, partyName: p ? p.name : '', amount: amt,
+        wallet: $('ptx-wal').value, note: $('ptx-note').value.trim()
+      });
+      const nw = $('ptx-wada').value;
+      if (p && nw) p.wadaDate = nw;
+      autoClearWadaIfZero(pid);
+      saveState(); closeModal('ptx-modal'); renderAll();
+      toast(ptxDir === 'wasooli' ? 'Wasooli save ho gayi ✅' : 'Adaigi save ho gayi ✅');
+    }
+
+    function renderKhata() {
+      const bals = calcPartyBalances();
+      let bizL = 0, bizD = 0, perL = 0, perD = 0;
+      S.parties.forEach(p => {
+        const b = bals[p.id] || 0;
+        const isP = (p.type || '').toLowerCase() === 'personal';
+        if (b > 0) { if (isP) perL += b; else bizL += b; }
+        else if (b < 0) { if (isP) perD += Math.abs(b); else bizD += Math.abs(b); }
+      });
+      $('k-tot-lene').textContent = fmtRs(bizL + perL);
+      $('k-sub-lene').textContent = `Biz: ${fmtRs(bizL)} | Personal: ${fmtRs(perL)}`;
+      $('k-tot-dene').textContent = fmtRs(bizD + perD);
+      $('k-sub-dene').textContent = `Biz: ${fmtRs(bizD)} | Personal: ${fmtRs(perD)}`;
+
+      const q = ($('k-search').value || '').trim().toLowerCase();
+      const list = S.parties.filter(p => {
+        if (q && !p.name.toLowerCase().includes(q) && !(p.phone || '').includes(q)) return false;
+        const b = bals[p.id] || 0;
+        const isP = (p.type || '').toLowerCase() === 'personal';
+        if (kFilter === 'biz') return !isP;
+        if (kFilter === 'personal') return isP;
+        if (kFilter === 'lene') return b > 0;
+        if (kFilter === 'dene') return b < 0;
+        if (kFilter === 'wada') return Boolean(p.wadaDate) && b !== 0;
+        if (kFilter === 'clear') return b === 0;
+        return true;
+      });
+
+      if (list.length === 0) {
+        $('k-list').innerHTML = `<div class="empty-state"><p>Koi party nahi mili — upar <strong>+ Nayi Party / Personal</strong> se add karein.</p></div>`;
+        return;
+      }
+      const td = todayStr();
+      $('k-list').innerHTML = list.map(p => {
+        const b = bals[p.id] || 0;
+        const isP = (p.type || '').toLowerCase() === 'personal';
+        const typeBadge = isP ? '<span class="badge b-indigo">👤 Personal</span>' : (p.type === 'Dealer' ? '<span class="badge b-blue">🏢 Dealer</span>' : '<span class="badge b-gray">🌾 Customer</span>');
+        const wadaBadge = (p.wadaDate && b !== 0) ? `<span class="badge ${p.wadaDate <= td ? 'b-red' : 'b-warn'}">📅 ${p.wadaDate}</span>` : '';
+        const amtCls = b > 0 ? 'c-green' : (b < 0 ? 'c-red' : 'c-muted');
+        const amtLbl = b > 0 ? 'Lene' : (b < 0 ? 'Dene' : 'Clear');
+        return `<div class="list-item">
+          <div class="li-top">
+            <div>
+              <div class="li-title">${esc(p.name)} ${typeBadge} ${wadaBadge}</div>
+              <div class="li-sub">${p.phone ? '📞 ' + esc(p.phone) : 'Phone darj nahi'}</div>
+            </div>
+            <div class="li-amt num ${amtCls}">${fmtRs(Math.abs(b))}<div style="font-size:0.66rem;">${amtLbl}</div></div>
+          </div>
+          <div class="li-actions">
+            <button class="btn btn-xs btn-soft-green" onclick="openPartyTxModal('wasooli','${p.id}')">🟢 Wasooli</button>
+            <button class="btn btn-xs btn-soft-red" onclick="openPartyTxModal('adaigi','${p.id}')">🔴 Adaigi</button>
+            <button class="btn btn-xs btn-soft" onclick="openStatement('${p.id}')">📄 Statement</button>
+            ${b > 0 ? `<button class="btn btn-xs btn-wa" onclick="sendPartyWA('${p.id}')">💬 WA</button>` : ''}
+            <button class="btn btn-xs btn-soft" onclick="openPartyModal('${p.id}')">✏️</button>
+            <button class="btn btn-xs btn-soft-red" onclick="deleteParty('${p.id}')">🗑️</button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function sendPartyWA(pid) {
+      const p = S.parties.find(x => x.id === pid);
+      if (!p) return;
+      const b = calcPartyBalances()[pid] || 0;
+      const tpl = S.settings.waTemplate || defaultState().settings.waTemplate;
+      const msg = tpl
+        .replace(/\{name\}/g, p.name)
+        .replace(/\{amount\}/g, fmtRs(Math.abs(b)))
+        .replace(/\{shop\}/g, S.settings.shopName || 'Mera Hisab')
+        .replace(/\{date\}/g, p.wadaDate || todayStr());
+      const ph = cleanPhone(p.phone);
+      const url = ph ? `https://wa.me/${ph}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+
+    function buildStatementData(pid) {
+      const p = S.parties.find(x => x.id === pid);
+      if (!p) return null;
+      let run = +p.openingBalance || 0;
+      const rows = [];
+      if (run !== 0) rows.push({ date: '-', desc: 'Purana Udhaar (Opening)', dr: run > 0 ? run : 0, cr: run < 0 ? Math.abs(run) : 0, bal: run });
+      // Sort strictly by date ascending so backdated old entries show in proper chronological order
+      const txs = S.transactions
+        .filter(t => t.partyId === pid)
+        .slice()
+        .sort((a, b) => (a.date || '').localeCompare(b.date || '') || ((a.createdAt || 0) - (b.createdAt || 0)));
+      txs.forEach(t => {
+        let dr = 0, cr = 0, desc = '';
+        const tot = +t.grandTotal || +t.amount || 0, paid = +t.paidAmount || 0;
+        if (t.type === 'sale') { dr = tot - paid; desc = `Sale Bill ${t.billNo || ''} (Kul ${fmtRs(tot)}, Paid ${fmtRs(paid)})`; }
+        else if (t.type === 'buy') { cr = tot - paid; desc = `Purchase ${t.billNo || ''} (Kul ${fmtRs(tot)}, Paid ${fmtRs(paid)})`; }
+        else if (t.type === 'sale_return') { cr = tot - paid; desc = `Sale Return ${t.billNo || ''}`; }
+        else if (t.type === 'buy_return') { dr = tot - paid; desc = `Buy Return ${t.billNo || ''}`; }
+        else if (t.type === 'party_wasooli') { cr = +t.amount || 0; desc = `Wasooli (${WALLET_LABELS[t.wallet] || ''}) ${t.note || ''}`; }
+        else if (t.type === 'party_adaigi') { dr = +t.amount || 0; desc = `Adaigi (${WALLET_LABELS[t.wallet] || ''}) ${t.note || ''}`; }
+        else if (t.type === 'online_service' && t.payMode === 'udhaar') { dr = +t.amount || 0; desc = `Online Service: ${t.title || ''}`; }
+        if (dr === 0 && cr === 0 && !['sale', 'buy', 'sale_return', 'buy_return'].includes(t.type)) return;
+        run += (dr - cr);
+        if (Math.abs(run) < 0.01) run = 0;
+        rows.push({ date: t.date, desc: desc.trim(), dr, cr, bal: run });
+      });
+      return { p, rows, finalBal: run };
+    }
+
+    function openStatement(pid) {
+      activeStmtPartyId = pid;
+      const d = buildStatementData(pid);
+      if (!d) return;
+      $('stmt-title').textContent = `📒 ${d.p.name} — Statement`;
+      const cls = d.finalBal > 0 ? 'c-green' : (d.finalBal < 0 ? 'c-red' : 'c-muted');
+      const lbl = d.finalBal > 0 ? 'Lene Hain' : (d.finalBal < 0 ? 'Dene Hain' : 'Clear');
+      $('stmt-body').innerHTML = `
+        <div class="stat-box" style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;">
+          <div><div class="sb-l">${esc(d.p.type || 'Customer')} ${d.p.phone ? '• ' + esc(d.p.phone) : ''}</div><div style="font-size:0.74rem;color:var(--muted);">Mojooda Balance (${lbl})</div></div>
+          <div class="sb-v num ${cls}" style="font-size:1.1rem;">${fmtRs(Math.abs(d.finalBal))}</div>
+        </div>
+        <div class="tbl-wrap"><table class="data-tbl">
+          <thead><tr><th>Tareekh</th><th>Tafseel</th><th class="ta-r">Lene (+)</th><th class="ta-r">Dene (-)</th><th class="ta-r">Balance</th></tr></thead>
+          <tbody>${d.rows.length ? d.rows.map(r => `<tr>
+            <td style="white-space:nowrap;">${esc(r.date)}</td>
+            <td>${esc(r.desc)}</td>
+            <td class="ta-r num">${r.dr ? fmtRs(r.dr) : '-'}</td>
+            <td class="ta-r num">${r.cr ? fmtRs(r.cr) : '-'}</td>
+            <td class="ta-r num ${r.bal > 0 ? 'c-green' : (r.bal < 0 ? 'c-red' : '')}" style="font-weight:800;white-space:nowrap;">${fmtRs(Math.abs(r.bal))} ${r.bal > 0 ? 'L' : (r.bal < 0 ? 'D' : '')}</td>
+          </tr>`).join('') : '<tr><td colspan="5" style="text-align:center;color:var(--muted);">Koi record nahi</td></tr>'}</tbody>
+        </table></div>`;
+      $('stmt-wa-btn').onclick = () => sendStatementWA(pid);
+      openModal('stmt-modal');
+    }
+    function sendStatementWA(pid) {
+      const d = buildStatementData(pid);
+      if (!d) return;
+      const statusTxt = d.finalBal > 0 ? `Lene Hain: *${fmtRs(d.finalBal)}*` : (d.finalBal < 0 ? `Dene Hain: *${fmtRs(Math.abs(d.finalBal))}*` : '*Hisab Clear (Rs. 0)*');
+      let txt = `*${S.settings.shopName} — Account Statement*\nParty: ${d.p.name}\nDate: ${todayStr()}\n----------------\n`;
+      const recent = d.rows.slice(-10);
+      recent.forEach(r => {
+        const mv = r.dr ? `+${fmtRs(r.dr)}` : (r.cr ? `-${fmtRs(r.cr)}` : 'Paid Full');
+        txt += `${r.date}: ${r.desc} (${mv})\n`;
+      });
+      if (d.rows.length > 10) txt += `...(pichli ${d.rows.length - 10} entries pehle ki hain)\n`;
+      txt += `----------------\nMojooda Balance: ${statusTxt}`;
+      const ph = cleanPhone(d.p.phone);
+      window.open(ph ? `https://wa.me/${ph}?text=${encodeURIComponent(txt)}` : `https://wa.me/?text=${encodeURIComponent(txt)}`, '_blank');
+    }
+    function printStatement() {
+      if (!activeStmtPartyId) return;
+      const d = buildStatementData(activeStmtPartyId);
+      if (!d) return;
+      $('print-area').innerHTML = `<h2>${esc(S.settings.shopName)}</h2><p>Party Statement: <strong>${esc(d.p.name)}</strong> (${esc(d.p.phone || '-')}) | Date: ${todayStr()}</p>` + $('stmt-body').innerHTML;
+      window.print();
+    }
+
+    // ---------- BILL PREVIEW & PRINT ----------
+    function openBillModal(txId) {
+      activeBillId = txId;
+      const t = S.transactions.find(x => x.id === txId);
+      if (!t) return;
+      const isRet = t.type === 'sale_return' || t.type === 'buy_return';
+      const mLabels = { sale: 'Sale Bill', buy: 'Purchase Bill', sale_return: 'Sale Return', buy_return: 'Buy Return' };
+      const payLbl = t.payMode === 'udhaar' ? 'Udhaar / Khata Adjust' : (t.payMode === 'partial' ? `Aadha (${WALLET_LABELS[t.wallet] || ''})` : `Naqad (${WALLET_LABELS[t.wallet] || ''})`);
+      const paidLbl = isRet ? 'Cash Wapas' : 'Paid';
+      const remLbl = isRet ? 'Khata Adjust' : 'Baqi Udhaar';
+      $('bill-body').innerHTML = `
+        <div style="text-align:center;padding-bottom:10px;border-bottom:1px dashed var(--border);margin-bottom:10px;">
+          <strong style="font-size:1.05rem;">${esc(S.settings.shopName)}</strong>
+          ${S.settings.shopAddress ? `<div style="font-size:0.74rem;color:var(--muted);">${esc(S.settings.shopAddress)}</div>` : ''}
+          ${S.settings.shopPhone ? `<div style="font-size:0.74rem;color:var(--muted);">📞 ${esc(S.settings.shopPhone)}</div>` : ''}
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.76rem;margin-bottom:8px;">
+          <div><strong>${mLabels[t.type] || 'Bill'}:</strong> ${esc(t.billNo || '')}<br><strong>Party:</strong> ${esc(t.partyName || '')}</div>
+          <div style="text-align:right;"><strong>Date:</strong> ${esc(t.date)}<br><strong>Mode:</strong> ${esc(payLbl)}</div>
+        </div>
+        <div class="tbl-wrap"><table class="data-tbl">
+          <thead><tr><th>Item</th><th class="ta-r">Qty</th><th class="ta-r">Rate</th><th class="ta-r">Total</th></tr></thead>
+          <tbody>${(t.items || []).map(it => `<tr><td>${esc(it.name)}</td><td class="ta-r num">${it.qty}</td><td class="ta-r num">${fmtRs(it.rate)}</td><td class="ta-r num">${fmtRs(it.total)}</td></tr>`).join('')}</tbody>
+        </table></div>
+        <div style="margin-top:10px;font-size:0.82rem;text-align:right;line-height:1.7;">
+          <div>Subtotal: <strong class="num">${fmtRs(t.subtotal)}</strong></div>
+          ${(+t.discount > 0) ? `<div>Discount: <strong class="num">-${fmtRs(t.discount)}</strong></div>` : ''}
+          <div style="font-size:0.96rem;">Grand Total: <strong class="num c-green">${fmtRs(t.grandTotal)}</strong></div>
+          <div>${paidLbl}: <strong class="num">${fmtRs(t.paidAmount)}</strong> | ${remLbl}: <strong class="num c-warn">${fmtRs((+t.grandTotal || 0) - (+t.paidAmount || 0))}</strong></div>
+        </div>
+        ${t.note ? `<div style="margin-top:8px;padding:7px 9px;background:var(--surface-soft);border-radius:8px;font-size:0.74rem;color:var(--muted);">📝 <strong>Note:</strong> ${esc(t.note)}</div>` : ''}`;
+      openModal('bill-modal');
+    }
+    function printCurrentBill() {
+      if (!activeBillId) return;
+      $('print-area').innerHTML = $('bill-body').innerHTML;
+      window.print();
+    }
+    function shareCurrentBillWA() {
+      const t = S.transactions.find(x => x.id === activeBillId);
+      if (!t) return;
+      const p = S.parties.find(x => x.id === t.partyId);
+      const isRet = t.type === 'sale_return' || t.type === 'buy_return';
+      const mLabels = { sale: 'Sale Bill', buy: 'Purchase Bill', sale_return: 'Sale Return', buy_return: 'Buy Return' };
+      let txt = `*${S.settings.shopName}*\n${mLabels[t.type] || 'Bill'}: ${t.billNo || ''}\nDate: ${t.date}\nParty: ${t.partyName}\n----------------\n`;
+      (t.items || []).forEach(it => { txt += `${it.name} (${it.qty} × ${it.rate}) = ${fmtRs(it.total)}\n`; });
+      txt += `----------------\nTotal: *${fmtRs(t.grandTotal)}*\n${isRet ? 'Cash Wapas' : 'Paid'}: ${fmtRs(t.paidAmount)}\n${isRet ? 'Khata Adjust' : 'Baqi Udhaar'}: ${fmtRs((+t.grandTotal || 0) - (+t.paidAmount || 0))}`;
+      if (t.note) txt += `\nNote: ${t.note}`;
+      const ph = p ? cleanPhone(p.phone) : '';
+      window.open(ph ? `https://wa.me/${ph}?text=${encodeURIComponent(txt)}` : `https://wa.me/?text=${encodeURIComponent(txt)}`, '_blank');
+    }
+
+    // ---------- SAVING+, PLOT/GARI ASSETS & AMANAT ----------
+    function renderSavingTab() {
+      // 1. Savings
+      const ss = calcSavingsSummary();
+      $('sav-locked-tot').textContent = fmtRs(ss.locked);
+      $('sav-rel-tot').textContent = fmtRs(ss.released);
+      $('sav-list').innerHTML = S.savings.length ? S.savings.map(b => {
+        const sav = +b.savedAmount || 0;
+        const rel = +b.releasedAmount || 0;
+        const rem = Math.max(0, sav - rel);
+        const owed = Math.max(0, rel - sav);
+        const closed = b.status === 'closed';
+        return `<div class="list-item">
+          <div class="li-top">
+            <div>
+              <div class="li-title">${b.type === 'cameeti' ? '🔄' : '🏦'} ${esc(b.name)} <span class="badge ${closed ? 'b-gray' : 'b-green'}">${closed ? 'Closed' : 'Active'}</span></div>
+              <div class="li-sub">Jama: ${fmtRs(sav)} • Mili: ${fmtRs(rel)} ${+b.target > 0 ? '• Target: ' + fmtRs(b.target) : ''} ${b.note ? '• ' + esc(b.note) : ''}</div>
+            </div>
+            <div class="li-amt num ${owed > 0 ? 'c-red' : 'c-indigo'}">${fmtRs(owed > 0 ? owed : rem)}<div style="font-size:0.66rem;color:var(--muted);">${owed > 0 ? 'Baqi Qistein' : 'Locked'}</div></div>
+          </div>
+          <div class="li-actions">
+            <button class="btn btn-xs btn-soft-green" onclick="openSavTxModal('${b.id}','deposit')">➕ Qist Jama</button>
+            <button class="btn btn-xs btn-soft-indigo" onclick="openSavTxModal('${b.id}','release')">🔓 ${(+b.releasedAmount > 0) ? 'Mazeed Mili' : 'Khuli / Wapas'}</button>
+            <button class="btn btn-xs btn-soft" onclick="openSavModal('${b.id}')">✏️</button>
+            <button class="btn btn-xs btn-soft-red" onclick="deleteSavingBox('${b.id}')">🗑️</button>
+          </div>
+        </div>`;
+      }).join('') : `<div class="empty-state"><p>Abhi koi Saving ya Cameeti add nahi ki gayi.</p></div>`;
+
+      // 2. Plot / Gari Assets
+      const as = calcAssetsSummary();
+      $('ast-inv-tot').textContent = fmtRs(as.invested);
+      $('ast-val-tot').textContent = fmtRs(as.currentVal);
+      $('ast-list').innerHTML = S.assets.length ? S.assets.map(a => {
+        const sold = a.status === 'sold';
+        const mval = (+a.marketValue > 0 ? +a.marketValue : (+a.investedAmount || 0));
+        const sDiff = (+a.soldAmount || 0) - (+a.investedAmount || 0);
+        const soldBadge = sold ? `<span class="badge ${sDiff >= 0 ? 'b-green' : 'b-red'}">${sDiff >= 0 ? 'Nafa +' : 'Nuqsan '}${fmtRs(sDiff)}</span>` : '';
+        return `<div class="list-item">
+          <div class="li-top">
+            <div>
+              <div class="li-title">${esc(a.name)} <span class="badge ${sold ? 'b-gray' : 'b-indigo'}">${sold ? 'Sold' : esc(a.category || 'Asset')}</span> ${soldBadge}</div>
+              <div class="li-sub">Invested: ${fmtRs(a.investedAmount)} ${sold ? '• Sold For: ' + fmtRs(a.soldAmount) : '• Value: ' + fmtRs(mval)} ${a.note ? '• ' + esc(a.note) : ''}</div>
+            </div>
+            <div class="li-amt num ${sold ? 'c-muted' : 'c-indigo'}">${fmtRs(sold ? a.soldAmount : mval)}</div>
+          </div>
+          <div class="li-actions">
+            ${!sold ? `<button class="btn btn-xs btn-soft-indigo" onclick="openAssetTxModal('${a.id}','buy')">➕ Qist / Invest</button>
+            <button class="btn btn-xs btn-soft-green" onclick="openAssetTxModal('${a.id}','sell')">💰 Farokht (Sell)</button>` : ''}
+            <button class="btn btn-xs btn-soft" onclick="openAssetModal('${a.id}')">✏️ Edit</button>
+            <button class="btn btn-xs btn-soft-red" onclick="deleteAsset('${a.id}')">🗑️</button>
+          </div>
+        </div>`;
+      }).join('') : `<div class="empty-state"><p>Koi Plot, Gari ya Investment add nahi hai — upar <strong>+ Naya Asset</strong> se darj karein.</p></div>`;
+
+      // 3. Amanat
+      $('am-rem-tot').textContent = fmtRs(calcAmanatTotal());
+      $('am-list').innerHTML = S.amanats.length ? S.amanats.map(a => {
+        const rem = Math.max(0, (+a.totalAmount || 0) - (+a.returnedAmount || 0));
+        return `<div class="list-item">
+          <div class="li-top">
+            <div>
+              <div class="li-title">🤝 ${esc(a.name)} <span class="badge ${rem === 0 ? 'b-green' : 'b-warn'}">${rem === 0 ? 'Wapas Ho Gayi' : 'Baqiya'}</span></div>
+              <div class="li-sub">Kul Amanat: ${fmtRs(a.totalAmount)} • Wapas: ${fmtRs(a.returnedAmount)} ${a.phone ? '• ' + esc(a.phone) : ''} ${a.note ? '• ' + esc(a.note) : ''}</div>
+            </div>
+            <div class="li-amt num ${rem > 0 ? 'c-warn' : 'c-green'}">${fmtRs(rem)}</div>
+          </div>
+          <div class="li-actions">
+            ${rem > 0 ? `<button class="btn btn-xs btn-warn" onclick="openAmanatModal('out','${a.id}')">💸 Wapas Karein</button>` : ''}
+            <button class="btn btn-xs btn-soft-green" onclick="openAmanatModal('add','${a.id}')">➕ Mazeed Rakhi</button>
+            <button class="btn btn-xs btn-soft-red" onclick="deleteAmanat('${a.id}')">🗑️</button>
+          </div>
+        </div>`;
+      }).join('') : `<div class="empty-state"><p>Kisi ki koi Amanat darj nahi hai.</p></div>`;
+    }
+
+    // Saving handlers
+    function openSavModal(id) {
+      const b = id ? S.savings.find(x => x.id === id) : null;
+      $('sv-title').textContent = b ? '✏️ Saving / Cameeti Edit' : '🏦 Nayi Saving / Cameeti';
+      $('sv-id').value = b ? b.id : '';
+      $('sv-name').value = b ? b.name : '';
+      $('sv-type').value = b ? (b.type || 'cameeti') : 'cameeti';
+      $('sv-target').value = b ? (+b.target || 0) : 0;
+      $('sv-note').value = b ? (b.note || '') : '';
+      openModal('sav-modal');
+    }
+    function saveSavingBox() {
+      const id = $('sv-id').value, name = $('sv-name').value.trim();
+      if (!name) return toast('Naam likhein!', 'err');
+      if (id) {
+        const b = S.savings.find(x => x.id === id);
+        if (b) { b.name = name; b.type = $('sv-type').value; b.target = +$('sv-target').value || 0; b.note = $('sv-note').value.trim(); syncSavingStatus(b); }
+        S.transactions.forEach(t => { if (t.savingId === id) t.savingName = name; });
+      } else {
+        S.savings.unshift({ id: uid('sav'), name, type: $('sv-type').value, target: +$('sv-target').value || 0, savedAmount: 0, releasedAmount: 0, status: 'active', note: $('sv-note').value.trim() });
+      }
+      saveState(); closeModal('sav-modal'); renderAll(); toast('Saving box save ho gaya ✅');
+    }
+    function deleteSavingBox(id) {
+      if (S.transactions.some(t => t.savingId === id)) return toast('Pehle History se is Saving ki entries delete karein!', 'err');
+      askConfirm('Saving Delete Karein?', 'Kya aap is saving box ko hatana chahte hain?', () => {
+        S.savings = S.savings.filter(x => x.id !== id);
+        saveState(); renderAll(); toast('Saving delete ho gayi');
+      });
+    }
+    function openSavTxModal(id, mode) {
+      const b = S.savings.find(x => x.id === id);
+      if (!b) return;
+      $('svt-id').value = id; $('svt-mode').value = mode;
+      $('svt-title').textContent = mode === 'deposit' ? `➕ Qist Jama — ${b.name}` : `🔓 Wapsi / Khulna — ${b.name}`;
+      $('svt-info').textContent = `Jama: ${fmtRs(b.savedAmount)} | Mili: ${fmtRs(b.releasedAmount)}` + (+b.target > 0 ? ` | Baqiya Target: ${fmtRs(Math.max(0, b.target - b.savedAmount))}` : '');
+      $('svt-amt').value = ''; $('svt-date').value = todayStr(); $('svt-wal').value = 'cash'; $('svt-note').value = '';
+      openModal('savtx-modal');
+    }
+    function syncSavingStatus(b) {
+      if (!b) return;
+      const sav = +b.savedAmount || 0, rel = +b.releasedAmount || 0, tgt = +b.target || 0;
+      if (tgt > 0) b.status = (sav >= tgt && rel >= tgt) ? 'closed' : 'active';
+      else b.status = (sav > 0 && rel >= sav) ? 'closed' : 'active';
+    }
+    function saveSavingTx() {
+      const id = $('svt-id').value, mode = $('svt-mode').value, amt = +$('svt-amt').value || 0;
+      const b = S.savings.find(x => x.id === id);
+      if (!b || amt <= 0) return toast('Sahi raqam likhein!', 'err');
+      if (mode === 'deposit') b.savedAmount = (+b.savedAmount || 0) + amt;
+      else b.releasedAmount = (+b.releasedAmount || 0) + amt;
+      syncSavingStatus(b);
+      S.transactions.unshift({
+        id: uid('stx'), type: mode === 'deposit' ? 'saving_deposit' : 'saving_release',
+        date: $('svt-date').value || todayStr(), createdAt: Date.now(),
+        savingId: id, savingName: b.name, amount: amt, wallet: $('svt-wal').value, note: $('svt-note').value.trim()
+      });
+      saveState(); closeModal('savtx-modal'); renderAll(); toast('Saving entry save ho gayi ✅');
+    }
+
+    // Asset handlers
+    function openAssetModal(id) {
+      const a = id ? S.assets.find(x => x.id === id) : null;
+      $('as-title').textContent = a ? '✏️ Asset Edit Karein' : '🏡 Naya Plot / Gari / Asset';
+      $('as-id').value = a ? a.id : '';
+      $('as-name').value = a ? a.name : '';
+      $('as-cat').value = a ? (a.category || 'Plot / Zameen') : 'Plot / Zameen';
+      $('as-date').value = todayStr();
+      $('as-amt').value = '';
+      $('as-mval').value = a && a.marketValue ? a.marketValue : '';
+      $('as-note').value = a ? (a.note || '') : '';
+      $('as-deduct').checked = true;
+      $('as-init-fields').style.display = a ? 'none' : 'block';
+      $('as-date-wrap').style.display = a ? 'none' : 'block';
+      openModal('asset-modal');
+    }
+    function saveAsset() {
+      const id = $('as-id').value, name = $('as-name').value.trim();
+      if (!name) return toast('Asset ka naam likhein!', 'err');
+      const mvalRaw = $('as-mval').value.trim();
+      const mval = mvalRaw === '' ? 0 : Math.max(0, +mvalRaw || 0);
+      if (id) {
+        const a = S.assets.find(x => x.id === id);
+        if (a) { a.name = name; a.category = $('as-cat').value; a.marketValue = mval; a.note = $('as-note').value.trim(); }
+        S.transactions.forEach(t => { if (t.assetId === id) t.assetName = name; });
+      } else {
+        const amt = +$('as-amt').value || 0;
+        if (amt <= 0) return toast('Lagayi gayi raqam likhein!', 'err');
+        const aid = uid('ast');
+        const wal = $('as-deduct').checked ? $('as-wal').value : 'none';
+        S.assets.unshift({ id: aid, name, category: $('as-cat').value, investedAmount: amt, marketValue: mval, soldAmount: 0, status: 'active', note: $('as-note').value.trim() });
+        S.transactions.unshift({
+          id: uid('atx'), type: 'asset_buy', date: $('as-date').value || todayStr(), createdAt: Date.now(),
+          assetId: aid, assetName: name, amount: amt, wallet: wal, note: $('as-note').value.trim() || 'Initial Purchase'
+        });
+      }
+      saveState(); closeModal('asset-modal'); renderAll(); toast('Asset save ho gaya ✅');
+    }
+    function deleteAsset(id) {
+      if (S.transactions.some(t => t.assetId === id)) return toast('Pehle History se is Asset ki entries delete karein!', 'err');
+      askConfirm('Asset Delete Karein?', 'Kya aap is asset ko hatana chahte hain?', () => {
+        S.assets = S.assets.filter(x => x.id !== id);
+        saveState(); renderAll(); toast('Asset delete ho gaya');
+      });
+    }
+    function openAssetTxModal(id, mode) {
+      const a = S.assets.find(x => x.id === id);
+      if (!a) return;
+      $('astx-id').value = id; $('astx-mode').value = mode;
+      $('astx-title').textContent = mode === 'buy' ? `➕ Qist / Investment — ${a.name}` : `💰 Farokht (Sell) — ${a.name}`;
+      $('astx-amt-lbl').textContent = mode === 'buy' ? 'Mazeed Lagayi Raqam (Rs.) *' : 'Farokht Qeemat (Sell Price Rs.) *';
+      $('astx-info').textContent = `Kul Invested: ${fmtRs(a.investedAmount)}`;
+      $('astx-amt').value = ''; $('astx-date').value = todayStr(); $('astx-wal').value = 'bank'; $('astx-note').value = '';
+      openModal('assettx-modal');
+    }
+    function saveAssetTx() {
+      const id = $('astx-id').value, mode = $('astx-mode').value, amt = +$('astx-amt').value || 0;
+      const a = S.assets.find(x => x.id === id);
+      if (!a || amt <= 0) return toast('Sahi raqam likhein!', 'err');
+      if (mode === 'buy') {
+        a.investedAmount = (+a.investedAmount || 0) + amt;
+      } else {
+        a.status = 'sold';
+        a.soldAmount = amt;
+      }
+      S.transactions.unshift({
+        id: uid('atx'), type: mode === 'buy' ? 'asset_buy' : 'asset_sell',
+        date: $('astx-date').value || todayStr(), createdAt: Date.now(),
+        assetId: id, assetName: a.name, amount: amt, wallet: $('astx-wal').value,
+        profit: mode === 'sell' ? (amt - (+a.investedAmount || 0)) : 0,
+        note: $('astx-note').value.trim()
+      });
+      saveState(); closeModal('assettx-modal'); renderAll(); toast(mode === 'buy' ? 'Investment add ho gayi ✅' : 'Asset farokht save ho gayi ✅');
+    }
+
+    // Amanat handlers
+    function openAmanatModal(mode = 'in', id = '') {
+      $('am-mode').value = mode; $('am-id').value = id;
+      const a = id ? S.amanats.find(x => x.id === id) : null;
+      $('am-in-fields').style.display = mode === 'in' ? 'block' : 'none';
+      $('am-ret-info').style.display = a ? 'block' : 'none';
+      $('am-wal-chk-wrap').style.display = 'flex';
+      $('am-wal-chk-lbl').textContent = mode === 'out'
+        ? 'Wallet se Cash kaatein (Agar purani wapsi ka record daal rahe hain to untick karein)'
+        : 'Wallet mein Cash jama karein (Agar pehle se Opening Cash mein gin liya hai to untick karein)';
+      if (mode === 'in') {
+        $('am-title').textContent = '🤝 Nayi Amanat Darj Karein';
+        $('am-name').value = ''; $('am-phone').value = '';
+      } else if (a) {
+        const rem = Math.max(0, (+a.totalAmount || 0) - (+a.returnedAmount || 0));
+        $('am-title').textContent = mode === 'out' ? `💸 Amanat Wapsi — ${a.name}` : `➕ Mazeed Amanat — ${a.name}`;
+        $('am-ret-info').textContent = `Baqiya Amanat: ${fmtRs(rem)}`;
+      }
+      $('am-amt').value = ''; $('am-date').value = todayStr(); $('am-wal').value = 'cash'; $('am-wal-chk').checked = true; $('am-note').value = '';
+      openModal('amanat-modal');
+    }
+    function saveAmanat() {
+      const mode = $('am-mode').value, id = $('am-id').value, amt = +$('am-amt').value || 0;
+      if (amt <= 0) return toast('Sahi raqam likhein!', 'err');
+      if (mode === 'in') {
+        const name = $('am-name').value.trim();
+        if (!name) return toast('Rakhne wale ka naam likhein!', 'err');
+        const aid = uid('am');
+        const wal = $('am-wal-chk').checked ? $('am-wal').value : 'none';
+        S.amanats.unshift({ id: aid, name, phone: $('am-phone').value.trim(), totalAmount: amt, returnedAmount: 0, note: $('am-note').value.trim() });
+        S.transactions.unshift({ id: uid('amtx'), type: 'amanat_in', date: $('am-date').value || todayStr(), createdAt: Date.now(), amanatId: aid, amanatName: name, amount: amt, wallet: wal, note: $('am-note').value.trim() });
+      } else if (mode === 'add') {
+        const a = S.amanats.find(x => x.id === id);
+        if (!a) return;
+        const wal = $('am-wal-chk').checked ? $('am-wal').value : 'none';
+        a.totalAmount = (+a.totalAmount || 0) + amt;
+        S.transactions.unshift({ id: uid('amtx'), type: 'amanat_in', date: $('am-date').value || todayStr(), createdAt: Date.now(), amanatId: id, amanatName: a.name, amount: amt, wallet: wal, note: $('am-note').value.trim() || 'Mazeed Amanat' });
+      } else if (mode === 'out') {
+        const a = S.amanats.find(x => x.id === id);
+        if (!a) return;
+        const rem = Math.max(0, (+a.totalAmount || 0) - (+a.returnedAmount || 0));
+        if (amt > rem + 0.01) return toast(`Wapsi baqiya amanat (${fmtRs(rem)}) se zyada nahi ho sakti!`, 'err');
+        const wal = $('am-wal-chk').checked ? $('am-wal').value : 'none';
+        a.returnedAmount = (+a.returnedAmount || 0) + amt;
+        S.transactions.unshift({ id: uid('amtx'), type: 'amanat_out', date: $('am-date').value || todayStr(), createdAt: Date.now(), amanatId: id, amanatName: a.name, amount: amt, wallet: wal, note: $('am-note').value.trim() || 'Amanat Wapsi' });
+      }
+      saveState(); closeModal('amanat-modal'); renderAll(); toast('Amanat record save ho gaya ✅');
+    }
+    function deleteAmanat(id) {
+      if (S.transactions.some(t => t.amanatId === id)) return toast('Pehle History se is Amanat ki entries delete karein!', 'err');
+      askConfirm('Amanat Delete Karein?', 'Kya aap is Amanat record ko hatana chahte hain?', () => {
+        S.amanats = S.amanats.filter(x => x.id !== id);
+        saveState(); renderAll(); toast('Amanat record delete ho gaya');
+      });
+    }
+
+    // ---------- MENU: ONLINE, KHARCH, HISTORY, REPORTS, SETTINGS ----------
+    function renderMenuTab() {
+      if (!$('exp-date').value) $('exp-date').value = todayStr();
+      if (!$('os-date').value) $('os-date').value = todayStr();
+      if (!$('oc-date').value) $('oc-date').value = todayStr();
+      const prevOsP = $('os-party').value;
+      $('os-party').innerHTML = S.parties.length ? S.parties.map(p => `<option value="${p.id}">${esc(p.name)}</option>`).join('') : '<option value="">Pehle Party Add Karein</option>';
+      if (prevOsP && S.parties.some(x => x.id === prevOsP)) $('os-party').value = prevOsP;
+      if (menuSub === 'hist') renderHistory();
+      if (menuSub === 'rep') renderReport();
+      if (menuSub === 'set') renderSettings();
+    }
+    function toggleOsMode() {
+      $('os-party-wrap').style.display = $('os-mode').value === 'udhaar' ? 'block' : 'none';
+    }
+    function saveExpense() {
+      const amt = +$('exp-amt').value || 0, desc = $('exp-desc').value.trim();
+      if (amt <= 0 || !desc) return toast('Raqam aur tafseel dono likhein!', 'err');
+      S.transactions.unshift({
+        id: uid('exp'), type: 'expense', date: $('exp-date').value || todayStr(), createdAt: Date.now(),
+        category: $('exp-cat').value, amount: amt, wallet: $('exp-wal').value, note: desc
+      });
+      $('exp-amt').value = ''; $('exp-desc').value = '';
+      saveState(); renderAll(); toast('Kharch save ho gaya ✅');
+    }
+    function saveOnlineService() {
+      const title = $('os-title').value.trim(), amt = +$('os-amt').value || 0, mode = $('os-mode').value;
+      if (!title || amt <= 0) return toast('Service naam aur sahi raqam likhein!', 'err');
+      const pid = mode === 'udhaar' ? $('os-party').value : '';
+      if (mode === 'udhaar' && !pid) return toast('Udhaar ke liye Party select karein!', 'err');
+      const p = S.parties.find(x => x.id === pid);
+      S.transactions.unshift({
+        id: uid('os'), type: 'online_service', date: $('os-date').value || todayStr(), createdAt: Date.now(),
+        title, amount: amt, payMode: mode === 'udhaar' ? 'udhaar' : 'cash',
+        wallet: mode === 'udhaar' ? 'none' : mode, partyId: pid, partyName: p ? p.name : '', note: title
+      });
+      if (pid) autoClearWadaIfZero(pid);
+      $('os-title').value = ''; $('os-amt').value = '';
+      saveState(); renderAll(); toast('Online amdani save ho gayi ✅');
+    }
+    function saveOnlineComm() {
+      const amt = Math.max(0, +$('oc-amt').value || 0), comm = +$('oc-comm').value || 0;
+      const from = $('oc-from').value, to = $('oc-to').value, cwal = $('oc-cwal').value || 'cash';
+      if (comm <= 0) return toast('Commission nafa likhein!', 'err');
+      if (amt > 0 && from === to) return toast('Transfer ke liye dono wallets alag chunein!', 'err');
+      S.transactions.unshift({
+        id: uid('oc'), type: 'online_comm', date: $('oc-date').value || todayStr(), createdAt: Date.now(),
+        amount: amt, profit: comm, fromWallet: from, toWallet: to, commWallet: cwal,
+        note: $('oc-note').value.trim() || `Commission (${WALLET_LABELS[from]} → ${WALLET_LABELS[to]})`
+      });
+      $('oc-amt').value = ''; $('oc-comm').value = ''; $('oc-note').value = '';
+      saveState(); renderAll(); toast('Commission save ho gaya ✅');
+    }
+
+    // History + Safe Edit & Delete
+    function txTitle(t) {
+      const m = {
+        sale: `🧾 Sale ${t.billNo || ''} — ${t.partyName || ''}`,
+        buy: `📦 Purchase ${t.billNo || ''} — ${t.partyName || ''}`,
+        sale_return: `🟠 Sale Return ${t.billNo || ''} — ${t.partyName || ''}`,
+        buy_return: `🟣 Buy Return ${t.billNo || ''} — ${t.partyName || ''}`,
+        party_wasooli: `🟢 Wasooli — ${t.partyName || ''}`,
+        party_adaigi: `🔴 Adaigi — ${t.partyName || ''}`,
+        online_service: `📱 Online: ${t.title || ''}`,
+        online_comm: `🔁 Commission (+${fmtRs(t.profit || 0)})`,
+        expense: `💸 ${t.category === 'home' ? 'Ghar Kharch' : 'Dukaan Kharch'}`,
+        transfer: `🔄 Transfer (${WALLET_LABELS[t.fromWallet] || ''} → ${WALLET_LABELS[t.toWallet] || ''})`,
+        wallet_adjust: `⚖️ Cash Adjust (${WALLET_LABELS[t.wallet] || ''})`,
+        saving_deposit: `🏦 Saving Jama — ${t.savingName || ''}`,
+        saving_release: `🔓 Saving Wapsi — ${t.savingName || ''}`,
+        asset_buy: `🏡 Asset Buy — ${t.assetName || ''}`,
+        asset_sell: `💰 Asset Sold — ${t.assetName || ''}`,
+        amanat_in: `🤝 Amanat Mili — ${t.amanatName || ''}`,
+        amanat_out: `💸 Amanat Wapsi — ${t.amanatName || ''}`,
+        damage: `⚠️ Damage — ${t.prodName || ''} (${t.qty || 0})`
+      };
+      return m[t.type] || t.type;
+    }
+
+    function renderHistory() {
+      const q = ($('h-search').value || '').trim().toLowerCase();
+      const ft = $('h-type').value;
+      const list = S.transactions.filter(t => {
+        if (ft !== 'all') {
+          if (ft === 'returns' && !['sale_return', 'buy_return'].includes(t.type)) return false;
+          else if (ft === 'khata' && !['party_wasooli', 'party_adaigi'].includes(t.type)) return false;
+          else if (ft === 'online' && !['online_service', 'online_comm'].includes(t.type)) return false;
+          else if (ft === 'saving' && !['saving_deposit', 'saving_release'].includes(t.type)) return false;
+          else if (ft === 'asset' && !['asset_buy', 'asset_sell'].includes(t.type)) return false;
+          else if (ft === 'amanat' && !['amanat_in', 'amanat_out'].includes(t.type)) return false;
+          else if (ft === 'wallet' && !['transfer', 'wallet_adjust'].includes(t.type)) return false;
+          else if (['sale', 'buy', 'expense'].includes(ft) && t.type !== ft) return false;
+        }
+        if (q) {
+          const blob = `${txTitle(t)} ${t.note || ''} ${t.date || ''} ${t.partyName || ''}`.toLowerCase();
+          if (!blob.includes(q)) return false;
+        }
+        return true;
+      }).slice().sort((a, b) => (b.date || '').localeCompare(a.date || '') || ((b.createdAt || 0) - (a.createdAt || 0)));
+      $('hist-cnt').textContent = list.length;
+      if (list.length === 0) {
+        $('hist-list').innerHTML = `<div class="empty-state"><p>Koi entry nahi mili.</p></div>`;
+        return;
+      }
+      const shown = list.slice(0, histLimit);
+      let html = shown.map(t => {
+        const isBill = ['sale', 'buy', 'sale_return', 'buy_return'].includes(t.type);
+        const walTxt = t.type === 'transfer' ? `${WALLET_LABELS[t.fromWallet]} → ${WALLET_LABELS[t.toWallet]}`
+          : (t.type === 'online_comm' ? ((+t.amount || 0) > 0 ? `${fmtRs(t.amount)} (${WALLET_LABELS[t.fromWallet]} → ${WALLET_LABELS[t.toWallet]}) • Comm: ${WALLET_LABELS[t.commWallet || 'cash']}` : `Comm: ${WALLET_LABELS[t.commWallet || 'cash']}`)
+          : (t.payMode === 'udhaar' ? '📒 Udhaar'
+          : (t.payMode === 'partial' ? `⚖️ Aadha (${WALLET_LABELS[t.wallet] || ''}: ${fmtRs(t.paidAmount)}, Udhaar: ${fmtRs((+t.grandTotal || 0) - (+t.paidAmount || 0))})`
+          : (WALLET_LABELS[t.wallet] || ''))));
+        const dispAmt = t.type === 'online_comm' ? (+t.profit || 0) : (+t.grandTotal || +t.amount || 0);
+        return `<div class="list-item">
+          <div class="li-top">
+            <div>
+              <div class="li-title">${esc(txTitle(t))}</div>
+              <div class="li-sub">${esc(t.date)} • ${esc(walTxt)} ${t.note ? '• ' + esc(t.note) : ''}</div>
+            </div>
+            <div class="li-amt num">${fmtRs(dispAmt)}</div>
+          </div>
+          <div class="li-actions">
+            ${isBill ? `<button class="btn btn-xs btn-soft-green" onclick="openBillModal('${t.id}')">🧾 Bill</button>` : ''}
+            <button class="btn btn-xs btn-soft" onclick="openEditTx('${t.id}')">✏️ Edit</button>
+            <button class="btn btn-xs btn-soft-red" onclick="deleteTx('${t.id}')">🗑️ Delete</button>
+          </div>
+        </div>`;
+      }).join('');
+      if (list.length > histLimit) {
+        html += `<button class="btn btn-soft btn-block" onclick="histLimit+=80;renderHistory()">⬇️ Mazeed Entries Dikhein (${list.length - histLimit} baqi)</button>`;
+      }
+      $('hist-list').innerHTML = html;
+    }
+
+    function openEditTx(id) {
+      const t = S.transactions.find(x => x.id === id);
+      if (!t) return;
+      $('et-id').value = id;
+      const isBillOrDmg = ['sale', 'buy', 'sale_return', 'buy_return', 'damage'].includes(t.type);
+      $('et-summary').textContent = txTitle(t) + (isBillOrDmg ? ' — (Items/Raqam badalne ke liye purani entry delete karke nayi banayein)' : '');
+      $('et-date').value = t.date || todayStr();
+      $('et-note').value = t.note || '';
+      $('et-amt-wrap').style.display = isBillOrDmg ? 'none' : 'block';
+      $('et-amt-lbl').textContent = t.type === 'online_comm' ? 'Commission Nafa (Rs.)' : (t.type === 'wallet_adjust' ? 'Adjustment (+ / -)' : 'Raqam (Rs.)');
+      $('et-amt').inputMode = t.type === 'wallet_adjust' ? 'text' : 'decimal';
+      $('et-amt').value = t.type === 'online_comm' ? (+t.profit || 0) : (+t.amount || 0);
+      const canEditWal = ['expense', 'party_wasooli', 'party_adaigi', 'saving_deposit', 'saving_release', 'asset_buy', 'asset_sell', 'amanat_in', 'amanat_out', 'wallet_adjust'].includes(t.type)
+        || (t.type === 'online_service' && t.payMode !== 'udhaar');
+      $('et-wal-wrap').style.display = canEditWal ? 'block' : 'none';
+      if (canEditWal) $('et-wal').value = t.wallet || 'cash';
+      openModal('edit-tx-modal');
+    }
+
+    function saveEditedTx() {
+      const id = $('et-id').value;
+      const t = S.transactions.find(x => x.id === id);
+      if (!t) return;
+
+      const newDate = $('et-date').value || t.date;
+      const newNote = $('et-note').value.trim();
+      const isBillOrDmg = ['sale', 'buy', 'sale_return', 'buy_return', 'damage'].includes(t.type);
+      const walEditable = $('et-wal-wrap').style.display === 'block';
+      const nw = walEditable ? $('et-wal').value : t.wallet;
+
+      // Validate everything BEFORE mutating state (100% atomic)
+      let nv = 0, diff = 0;
+      if (!isBillOrDmg) {
+        nv = +$('et-amt').value;
+        if (isNaN(nv)) return toast('Sahi number likhein!', 'err');
+        if (t.type !== 'wallet_adjust' && nv <= 0) return toast('Raqam Rs. 0 se zyada honi chahiye!', 'err');
+        if (t.type === 'wallet_adjust' && nv === 0) return toast('Adjustment 0 nahi ho sakti!', 'err');
+        if (walEditable && ['expense', 'wallet_adjust', 'online_service'].includes(t.type) && nw === 'none') {
+          return toast('Is entry ke liye asli Wallet select karein!', 'err');
+        }
+        const old = t.type === 'online_comm' ? (+t.profit || 0) : (+t.amount || 0);
+        diff = nv - old;
+        if (t.type === 'amanat_in') {
+          const a = S.amanats.find(x => x.id === t.amanatId);
+          if (a && ((+a.totalAmount || 0) + diff) < (+a.returnedAmount || 0)) {
+            return toast('Kul Amanat wapas shuda raqam se kam nahi ho sakti!', 'err');
+          }
+        } else if (t.type === 'amanat_out') {
+          const a = S.amanats.find(x => x.id === t.amanatId);
+          if (a && ((+a.returnedAmount || 0) + diff) > (+a.totalAmount || 0)) {
+            return toast('Wapsi kul amanat se zyada nahi ho sakti!', 'err');
+          }
+        }
+      }
+
+      // Apply validated mutations
+      t.date = newDate;
+      t.note = newNote;
+      if (t.type === 'online_service' && newNote) t.title = newNote;
+      if (!isBillOrDmg) {
+        if (t.type === 'online_comm') t.profit = nv;
+        else if (t.type === 'saving_deposit') {
+          const b = S.savings.find(x => x.id === t.savingId);
+          if (b) { b.savedAmount = Math.max(0, (+b.savedAmount || 0) + diff); syncSavingStatus(b); }
+          t.amount = nv;
+        } else if (t.type === 'saving_release') {
+          const b = S.savings.find(x => x.id === t.savingId);
+          if (b) { b.releasedAmount = Math.max(0, (+b.releasedAmount || 0) + diff); syncSavingStatus(b); }
+          t.amount = nv;
+        } else if (t.type === 'asset_buy') {
+          const a = S.assets.find(x => x.id === t.assetId);
+          if (a) {
+            a.investedAmount = Math.max(0, (+a.investedAmount || 0) + diff);
+            if (a.status === 'sold') {
+              S.transactions.forEach(st => { if (st.type === 'asset_sell' && st.assetId === a.id) st.profit = (+st.amount || 0) - a.investedAmount; });
+            }
+          }
+          t.amount = nv;
+        } else if (t.type === 'asset_sell') {
+          const a = S.assets.find(x => x.id === t.assetId);
+          if (a) { a.soldAmount = nv; t.profit = nv - (+a.investedAmount || 0); }
+          t.amount = nv;
+        } else if (t.type === 'amanat_in') {
+          const a = S.amanats.find(x => x.id === t.amanatId);
+          if (a) a.totalAmount = Math.max(0, (+a.totalAmount || 0) + diff);
+          t.amount = nv;
+        } else if (t.type === 'amanat_out') {
+          const a = S.amanats.find(x => x.id === t.amanatId);
+          if (a) a.returnedAmount = Math.max(0, (+a.returnedAmount || 0) + diff);
+          t.amount = nv;
+        } else {
+          t.amount = nv;
+        }
+        if (walEditable) t.wallet = nw;
+      }
+      if (t.partyId) autoClearWadaIfZero(t.partyId);
+      saveState(); closeModal('edit-tx-modal'); renderAll(); toast('Entry update ho gayi ✅');
+    }
+
+    function deleteTx(id) {
+      const tx = S.transactions.find(x => x.id === id);
+      if (!tx) return;
+      // Guard: don't delete asset_buy if asset is already sold
+      if (tx.type === 'asset_buy') {
+        const a = S.assets.find(x => x.id === tx.assetId);
+        if (a && a.status === 'sold') return toast('Ye Asset farokht ho chuka hai — pehle Asset Sell entry delete karein!', 'err');
+      }
+      // Guard: don't delete amanat_in if returned exceeds remaining
+      if (tx.type === 'amanat_in') {
+        const a = S.amanats.find(x => x.id === tx.amanatId);
+        if (a && ((+a.totalAmount || 0) - (+tx.amount || 0)) < (+a.returnedAmount || 0)) {
+          return toast('Pehle is Amanat ki Wapsi entry delete karein!', 'err');
+        }
+      }
+      askConfirm('Entry Delete Karein?', `Kya aap "${txTitle(tx)}" ko delete karna chahte hain? Tamam Wallets, Stock aur Khata khud reverse ho jayenge.`, () => {
+        const r3 = n => Math.round((+n || 0) * 1000) / 1000;
+        // Reverse stock (exact arithmetic to match submitVBill)
+        if (['sale', 'buy', 'sale_return', 'buy_return'].includes(tx.type)) {
+          (tx.items || []).forEach(it => {
+            const p = S.products.find(x => x.id === it.prodId);
+            if (!p) return;
+            if (tx.type === 'sale' || tx.type === 'buy_return') p.stock = r3((+p.stock || 0) + (+it.qty || 0));
+            else p.stock = r3((+p.stock || 0) - (+it.qty || 0));
+          });
+        } else if (tx.type === 'damage') {
+          const p = S.products.find(x => x.id === tx.prodId);
+          if (p) p.stock = r3((+p.stock || 0) + (+tx.qty || 0));
+        } else if (tx.type === 'saving_deposit') {
+          const b = S.savings.find(x => x.id === tx.savingId);
+          if (b) { b.savedAmount = Math.max(0, (+b.savedAmount || 0) - (+tx.amount || 0)); syncSavingStatus(b); }
+        } else if (tx.type === 'saving_release') {
+          const b = S.savings.find(x => x.id === tx.savingId);
+          if (b) { b.releasedAmount = Math.max(0, (+b.releasedAmount || 0) - (+tx.amount || 0)); syncSavingStatus(b); }
+        } else if (tx.type === 'asset_buy') {
+          const a = S.assets.find(x => x.id === tx.assetId);
+          if (a) {
+            a.investedAmount = Math.max(0, (+a.investedAmount || 0) - (+tx.amount || 0));
+            if (a.investedAmount <= 0) S.assets = S.assets.filter(x => x.id !== a.id);
+          }
+        } else if (tx.type === 'asset_sell') {
+          const a = S.assets.find(x => x.id === tx.assetId);
+          if (a) { a.status = 'active'; a.soldAmount = 0; }
+        } else if (tx.type === 'amanat_in') {
+          const a = S.amanats.find(x => x.id === tx.amanatId);
+          if (a) {
+            a.totalAmount = Math.max(0, (+a.totalAmount || 0) - (+tx.amount || 0));
+            if (a.totalAmount <= 0 && (+a.returnedAmount || 0) <= 0) S.amanats = S.amanats.filter(x => x.id !== a.id);
+          }
+        } else if (tx.type === 'amanat_out') {
+          const a = S.amanats.find(x => x.id === tx.amanatId);
+          if (a) a.returnedAmount = Math.max(0, (+a.returnedAmount || 0) - (+tx.amount || 0));
+        }
+        S.transactions = S.transactions.filter(x => x.id !== id);
+        if (tx.partyId) autoClearWadaIfZero(tx.partyId);
+        saveState(); renderAll(); toast('Entry delete ho gayi');
+      });
+    }
+
+    // ---------- REPORTS & WADA QUEUE ----------
+    function renderReport() {
+      const td = todayStr();
+      if (!$('rep-from').value) $('rep-from').value = td.slice(0, 7) + '-01';
+      if (!$('rep-to').value) $('rep-to').value = td;
+      const fromD = $('rep-from').value, toD = $('rep-to').value;
+      if (fromD && toD && fromD > toD) {
+        $('rep-summary').innerHTML = `<div class="banner banner-warn"><span>⚠️ Shuru tareekh (From) aakhri tareekh (To) se barhi nahi ho sakti.</span></div>`;
+      } else {
+        const p = calcPnL(fromD, toD);
+        const ast = calcAssetsSummary();
+        const am = calcAmanatTotal();
+
+        $('rep-summary').innerHTML = `
+          <div class="grid-2" style="margin-bottom:8px;">
+            <div class="stat-box"><div class="sb-l">Kul Farokht (Sales)</div><div class="sb-v num">${fmtRs(p.totalSales)}</div></div>
+            <div class="stat-box"><div class="sb-l">Kul Khareed (Buy)</div><div class="sb-v num">${fmtRs(p.totalBuys)}</div></div>
+            <div class="stat-box"><div class="sb-l">Pesticides Nafa</div><div class="sb-v num ${p.pestProfit < 0 ? 'c-red' : 'c-green'}">${fmtRs(p.pestProfit)}</div></div>
+            <div class="stat-box"><div class="sb-l">Online Amdani</div><div class="sb-v num c-blue">${fmtRs(p.onlineInc)}</div></div>
+            <div class="stat-box"><div class="sb-l">Dukaan Kharch + Damage</div><div class="sb-v num c-red">${fmtRs(p.shopExp + p.damageLoss)}</div></div>
+            <div class="stat-box" style="background:var(--primary-soft);"><div class="sb-l">Net Business Bachat</div><div class="sb-v num ${p.netBiz < 0 ? 'c-red' : 'c-green'}">${fmtRs(p.netBiz)}</div></div>
+            <div class="stat-box"><div class="sb-l">Ghar / Personal Kharch</div><div class="sb-v num c-warn">${fmtRs(p.homeExp)}</div></div>
+            <div class="stat-box"><div class="sb-l">Plot/Gari Assets | Amanat</div><div class="sb-v num" style="font-size:0.8rem;">${fmtRs(ast.currentVal)} | ${fmtRs(am)}</div></div>
+          </div>`;
+      }
+
+      // Wada Queue (Both Lene & Dene)
+      const bals = calcPartyBalances();
+      const due = S.parties.filter(x => (bals[x.id] || 0) !== 0 && x.wadaDate && x.wadaDate <= td);
+      $('wada-queue-list').innerHTML = due.length ? due.map(x => {
+        const b = bals[x.id] || 0;
+        const isLene = b > 0;
+        return `<div class="list-item" style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+          <div><div class="li-title">${esc(x.name)}</div><div class="li-sub">Wada: ${x.wadaDate} • ${isLene ? 'Lene' : 'Dene'}: <strong class="${isLene ? 'c-green' : 'c-red'}">${fmtRs(Math.abs(b))}</strong></div></div>
+          ${isLene ? `<button class="btn btn-xs btn-wa" onclick="sendPartyWA('${x.id}')">💬 Bhejein</button>` : `<button class="btn btn-xs btn-soft-red" onclick="openPartyTxModal('adaigi','${x.id}')">🔴 Adaigi</button>`}
+        </div>`;
+      }).join('') : `<div class="empty-state" style="padding:14px;"><p>Aaj koi Wada overdue nahi hai ✅</p></div>`;
+    }
+    function printCustomReport() {
+      const fromD = $('rep-from').value, toD = $('rep-to').value;
+      if (fromD && toD && fromD > toD) return toast('Shuru tareekh aakhri tareekh se barhi nahi ho sakti!', 'err');
+      $('print-area').innerHTML = `<h2>${esc(S.settings.shopName)} — Business Report</h2><p>Muddat: ${fromD} se ${toD}</p>` + $('rep-summary').innerHTML;
+      window.print();
+    }
+    function shareReportWA() {
+      const fromD = $('rep-from').value, toD = $('rep-to').value;
+      if (fromD && toD && fromD > toD) return toast('Shuru tareekh aakhri tareekh se barhi nahi ho sakti!', 'err');
+      const p = calcPnL(fromD, toD);
+      const w = calcWallets();
+      const ast = calcAssetsSummary();
+      const am = calcAmanatTotal();
+      const txt = `*${S.settings.shopName} — Report*\n📅 ${fromD} se ${toD}\n----------------\n🌾 Sales: ${fmtRs(p.totalSales)}\n🌾 Pesticides Nafa: ${fmtRs(p.pestProfit)}\n📱 Online Amdani: ${fmtRs(p.onlineInc)}\n💸 Dukaan Kharch/Dmg: ${fmtRs(p.shopExp + p.damageLoss)}\n✅ *Net Business Bachat: ${fmtRs(p.netBiz)}*\n🏠 Ghar Kharch: ${fmtRs(p.homeExp)}\n----------------\n💵 Apna Cash: ${fmtRs(w.total - am)}\n🏡 Plot/Gari Assets: ${fmtRs(ast.currentVal)}\n🤝 Amanat: ${fmtRs(am)}`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`, '_blank');
+    }
+
+    // ---------- SETTINGS, PIN LOCK & BACKUP / CSV ----------
+    function renderSettings() {
+      $('set-shop').value = S.settings.shopName || '';
+      $('set-phone').value = S.settings.shopPhone || '';
+      $('set-addr').value = S.settings.shopAddress || '';
+      $('set-wa-tpl').value = S.settings.waTemplate || defaultState().settings.waTemplate;
+      const hasPin = Boolean(S.settings.pin && S.settings.pin.length === 4);
+      $('pin-status-badge').textContent = hasPin ? 'Active 🔒' : 'Off';
+      $('pin-status-badge').className = 'badge ' + (hasPin ? 'b-green' : 'b-gray');
+      $('set-pin').value = '';
+      $('set-pin-ans').value = S.settings.pinAnswer || '';
+      $('bkp-last-txt').textContent = S.settings.lastBackupAt ? `Aakhri Backup: ${new Date(S.settings.lastBackupAt).toLocaleString()}` : 'Aakhri Backup: Abhi tak nahi liya gaya';
+    }
+    function saveShopSettings() {
+      S.settings.shopName = $('set-shop').value.trim() || 'Mera Hisab Pro';
+      S.settings.shopPhone = $('set-phone').value.trim();
+      S.settings.shopAddress = $('set-addr').value.trim();
+      S.settings.waTemplate = $('set-wa-tpl').value.trim() || defaultState().settings.waTemplate;
+      saveState(); renderAll(); toast('Profile save ho gayi ✅');
+    }
+
+    // PIN Lock
+    function savePinSettings() {
+      const p = $('set-pin').value.trim();
+      if (!/^\d{4}$/.test(p)) return toast('Sirf 4 hindson ka numeric PIN likhein!', 'err');
+      S.settings.pin = p;
+      S.settings.pinAnswer = $('set-pin-ans').value.trim();
+      pinUnlocked = true;
+      saveState(); renderAll(); renderSettings(); toast('4-Digit PIN set ho gaya 🔒');
+    }
+    function removePinSettings() {
+      S.settings.pin = ''; S.settings.pinAnswer = ''; pinUnlocked = true; pinBuf = '';
+      saveState(); renderAll(); renderSettings(); toast('PIN lock hata diya gaya');
+    }
+    function lockAppNow() {
+      if (!S.settings.pin) return;
+      pinUnlocked = false; pinBuf = ''; updatePinDots();
+      $('pin-shop-title').textContent = S.settings.shopName || 'Mera Hisab Pro';
+      $('pin-msg').textContent = 'Apna 4-Hindson ka PIN Darj Karein';
+      $('pin-overlay').classList.add('open');
+    }
+    function pinPress(d) {
+      if (pinBuf.length >= 4) return;
+      pinBuf += d; updatePinDots();
+      if (pinBuf.length === 4) {
+        if (pinBuf === S.settings.pin) {
+          pinUnlocked = true; pinBuf = ''; updatePinDots();
+          $('pin-overlay').classList.remove('open');
+        } else {
+          $('pin-msg').textContent = '❌ Ghalat PIN! Dobara koshish karein.';
+          setTimeout(() => { pinBuf = ''; updatePinDots(); }, 350);
+        }
+      }
+    }
+    function pinBack() { pinBuf = pinBuf.slice(0, -1); updatePinDots(); }
+    function pinClear() { pinBuf = ''; updatePinDots(); }
+    function updatePinDots() { for (let i = 0; i < 4; i++) $('pd-' + i).classList.toggle('filled', i < pinBuf.length); }
+    function openForgotPin() {
+      if (!S.settings.pinAnswer) {
+        askConfirm('PIN Reset Karein?', 'Koi recovery jawab set nahi tha. Kya aap PIN hatana chahte hain? (Data mehfooz rahega)', () => {
+          removePinSettings(); $('pin-overlay').classList.remove('open');
+        });
+        return;
+      }
+      // Simple inline recovery via custom confirm modal replacement
+      $('pin-msg').innerHTML = `Recovery Jawab likhein: <input id="rec-ans-in" onkeydown="if(event.key==='Enter')verifyPinRecovery()" style="margin-top:8px;padding:7px 10px;border-radius:8px;border:none;width:180px;color:#0F172A;font-weight:700;" /> <button onclick="verifyPinRecovery()" style="padding:7px 10px;border-radius:8px;border:none;background:#10B981;color:#fff;font-weight:700;cursor:pointer;">Verify</button>`;
+      setTimeout(() => { if ($('rec-ans-in')) $('rec-ans-in').focus(); }, 50);
+    }
+    function verifyPinRecovery() {
+      const v = ($('rec-ans-in') ? $('rec-ans-in').value : '').trim().toLowerCase();
+      if (v && v === (S.settings.pinAnswer || '').trim().toLowerCase()) {
+        removePinSettings(); $('pin-overlay').classList.remove('open');
+        toast('PIN reset ho gaya ✅');
+      } else {
+        toast('Recovery jawab ghalat hai!', 'err');
+      }
+    }
+
+    // Backup JSON & Excel CSV
+    function downloadBlob(content, filename, mime) {
+      const blob = new Blob([content], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+    function downloadBackupJSON() {
+      S.settings.lastBackupAt = Date.now();
+      saveState();
+      downloadBlob(JSON.stringify(S, null, 2), `MeraHisab_Backup_${todayStr()}.json`, 'application/json');
+      renderAll(); if (menuSub === 'set') renderSettings();
+      toast('JSON Backup download ho gaya ✅');
+    }
+    async function shareBackupJSON() {
+      S.settings.lastBackupAt = Date.now();
+      saveState();
+      const json = JSON.stringify(S, null, 2);
+      const fname = `MeraHisab_Backup_${todayStr()}.json`;
+      try {
+        const file = new File([json], fname, { type: 'application/json' });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ title: 'Mera Hisab Backup', files: [file] });
+          renderAll(); if (menuSub === 'set') renderSettings();
+          return;
+        }
+      } catch (e) {}
+      downloadBackupJSON();
+    }
+    function restoreBackupJSON(ev) {
+      const f = ev.target.files && ev.target.files[0];
+      if (!f) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const data = JSON.parse(reader.result);
+          if (!data || !Array.isArray(data.transactions)) throw new Error('Invalid');
+          askConfirm('Backup Restore Karein?', 'Mojooda data is backup file se tabdeel ho jayega. Kya aap jari rakhna chahte hain?', () => {
+            S = normalizeState(data);
+            pinUnlocked = true;
+            saveState(); clearVCart(); renderAll(); renderSettings();
+            toast('Backup kamyabi se restore ho gaya ✅');
+          });
+        } catch (e) { toast('Ghalat backup file hai!', 'err'); }
+      };
+      reader.readAsText(f);
+      ev.target.value = '';
+    }
+    function csvEsc(v) { return `"${String(v == null ? '' : v).replace(/"/g, '""')}"`; }
+    function exportAllCSV() {
+      const hdr = ['Date', 'Type', 'Party/Title', 'Wallet', 'Amount', 'Paid', 'Profit/Loss', 'Note'];
+      const rows = S.transactions.map(t => {
+        let wal = t.type === 'transfer' ? `${t.fromWallet}->${t.toWallet}`
+          : (t.type === 'online_comm' ? ((+t.amount || 0) > 0 ? `${t.fromWallet}->${t.toWallet} (Comm:${t.commWallet || 'cash'})` : `Comm:${t.commWallet || 'cash'}`)
+          : (t.payMode === 'udhaar' ? 'Udhaar' : (t.wallet || '')));
+        let pl = 0;
+        if (t.type === 'sale' || t.type === 'sale_return' || t.type === 'online_comm') pl = +t.profit || 0;
+        else if (t.type === 'online_service') pl = +t.amount || 0;
+        else if (t.type === 'expense' && t.category !== 'home') pl = -(+t.amount || 0);
+        else if (t.type === 'damage' && t.countInLoss) pl = -(+t.amount || 0);
+        return [t.date, t.type, t.partyName || t.title || t.savingName || t.assetName || t.amanatName || t.prodName || '', wal, t.grandTotal || t.amount || 0, t.paidAmount != null ? t.paidAmount : '', pl, t.note || ''].map(csvEsc).join(',');
+      });
+      downloadBlob('\uFEFF' + hdr.join(',') + '\n' + rows.join('\n'), `MeraHisab_All_${todayStr()}.csv`, 'text/csv;charset=utf-8;');
+      toast('Excel CSV download ho gaya ✅');
+    }
+    function exportKhataCSV() {
+      const bals = calcPartyBalances();
+      const rows = S.parties.map(p => {
+        const b = bals[p.id] || 0;
+        return [p.name, p.type || 'Customer', p.phone || '', b > 0 ? b : 0, b < 0 ? Math.abs(b) : 0, p.wadaDate || ''].map(csvEsc).join(',');
+      });
+      downloadBlob('\uFEFFName,Type,Phone,Lene,Dene,WadaDate\n' + rows.join('\n'), `MeraHisab_Khata_${todayStr()}.csv`, 'text/csv;charset=utf-8;');
+      toast('Khata CSV download ho gaya ✅');
+    }
+    function exportStockCSV() {
+      const rows = S.products.map(p => [p.name, p.category || '', p.buyPrice, p.salePrice, p.stock, (+p.stock || 0) * (+p.buyPrice || 0), p.expiry || ''].map(csvEsc).join(','));
+      downloadBlob('\uFEFFProduct,Category,BuyRate,SaleRate,Stock,StockValue,Expiry\n' + rows.join('\n'), `MeraHisab_Stock_${todayStr()}.csv`, 'text/csv;charset=utf-8;');
+      toast('Stock CSV download ho gaya ✅');
+    }
+    function confirmFreshStart() {
+      askConfirm('Sab Data Clear Karein?', 'Kya aap waqai poora data khatam karke bilkul Rs. 0 se Fresh Start karna chahte hain? Pehle Backup zaroor le lein!', () => {
+        S = defaultState(); saveState(); clearVCart(); renderAll(); renderSettings();
+        toast('Fresh Start mukammal — sab data saaf ho gaya ✅');
+      });
+    }
+
+    // ---------- INITIALIZATION ----------
+    window.addEventListener('DOMContentLoaded', () => {
+      renderAll();
+      if (S.settings.pin && S.settings.pin.length === 4 && !pinUnlocked) {
+        lockAppNow();
+      }
+    });
+  </script>
+</body>
+</html>
